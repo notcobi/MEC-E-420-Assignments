@@ -1,5 +1,5 @@
 # Fdb version 4
-["pdflatex"] 1695704127 "c:/Users/Alex/Documents/LaTeX/MEC E 420/main.tex" "main.pdf" "main" 1695704130 0
+["pdflatex"] 1695706160 "c:/Users/Alex/Documents/LaTeX/MEC E 420/A1/main.tex" "main.pdf" "main" 1695706163 0
   "Appendix/A.tex" 1695703035 585 8763247b7228613b54fb3d5a39f5a7ac ""
   "C:/Users/Alex/AppData/Local/MiKTeX/fonts/map/pdftex/pdftex.map" 1695703030 80909 eab91d9745dd2edfd62a31d53cd5fe15 ""
   "C:/Users/Alex/AppData/Local/MiKTeX/miktex/data/le/pdftex/pdflatex.fmt" 1695700950 24141477 601480e762a236c8fe40ab3309037a0b ""
@@ -233,9 +233,9 @@
   "Questions/Q2.tex" 1695700772 8167 42a22fd12ee706bbac86b5fd1e7e0b1f ""
   "Questions/Q3.tex" 1695700773 1530 33c47800694cb9554a58f289a18a6e64 ""
   "Questions/Q4.tex" 1695700773 3671 ea6a4b344bc50e3a93d89b8119db40f1 ""
-  "c:/Users/Alex/Documents/LaTeX/MEC E 420/main.tex" 1695704126 3163 5694bff4a940b632bccb9b2ed4091cc5 ""
-  "main.aux" 1695704130 3783 217512ff2d6795299ddbcd227701fe9a "pdflatex"
-  "main.out" 1695704130 843 b42fb66e222af980808e4be3116cedb2 "pdflatex"
+  "c:/Users/Alex/Documents/LaTeX/MEC E 420/A1/main.tex" 1695706155 3197 110768a6fe3a6e03d6255f3de27bd7dc ""
+  "main.aux" 1695706162 3784 0ba664ca9a04e9319b37f942c41f5c53 "pdflatex"
+  "main.out" 1695706162 843 b42fb66e222af980808e4be3116cedb2 "pdflatex"
   (generated)
   "main.aux"
   "main.log"

@@ -1,6 +1,6 @@
-PWD C:\Users\Alex\Documents\LaTeX\MEC E 420
+PWD C:\Users\Alex\Documents\LaTeX\MEC E 420\A1
 INPUT C:\Users\Alex\AppData\Local\MiKTeX\miktex\data\le\pdftex\pdflatex.fmt
-INPUT c:\Users\Alex\Documents\LaTeX\MEC E 420\main.tex
+INPUT c:\Users\Alex\Documents\LaTeX\MEC E 420\A1\main.tex
 OUTPUT main.log
 INPUT C:\Users\Alex\AppData\Local\Programs\MiKTeX\tex\latex\base\article.cls
 INPUT C:\Users\Alex\AppData\Local\Programs\MiKTeX\tex\latex\base\article.cls
