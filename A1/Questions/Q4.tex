@@ -1,43 +1,59 @@
 \section{}
-\noindent From this investigation, the tool with the highest accuracy is the micrometer. The second best tool is the vernier caliper. With the caliper being nearly a magnitude more inaccurate than the micrometer. \\
-
-\noindent This result is somewhat unexpected. One would assume that the digital caliper would be superior over the vernier. The issues lies with human error.\\
-
-\noindent When using the digital caliper, determining when to stop applying pressure was difficult at the start. When a sufficient measurement was thought to be found, more pressure could be applied to further reduce the measurement distance. Fortunately, unlike the digital caliper, the micrometer has a built in system that stops the user from over tightening. \\
-
-\noindent Investigating the data more, the major contributor to the high uncertainty of the digital caliper is the accuracy. The digital caliper was the first tool used during the lab session, and adjustment to the new tools was a major factor to the error. A rerun of this investigation would probably increase the accuracy of the digital caliper.\\
-
-\noindent The vernier caliper has a resolution of 0.02. That meant that a different measurement reading would only be detected if there was a larger human error in measurement. In addition, at this point in the lab, familiarity with the tools made the measurements more consistent.\\
-
-\noindent This results of this exercise suggest to use the micrometer and the vernier caliper for measurement. Human error, due to unfamiliarity with the tools, was a large contributing factor to why the vernier caliper was chosen over the digital caliper. 
-
-\noindent Despite vernier having a lower uncertainty, the digital caliper should be used. With proper usage, the uncertainty should be lower. \\
-
-\noindent The table below summarizes the recommendations for each dimension. 
-
-\begin{table}[h]
-    \small
+Consider a cylinder rolling on a board, with a torque applied to the latter:
+\begin{figure}
     \centering
-    \caption{Summary table of all recommend tools for dimensions of block 22}
-    \label{tab:summary-table}
-    \begin{tabular}{llll}
-    \toprule
-    Dim. & Vernier                  & Micrometer                                                     & Digital                                                      \\
-    \midrule
-    A    & $\times$, Low Res. & $\times$, Range Exceeded                                     & $\boxed{\checkmark\; \text{Compat. Geo., In Range, High Res.}}$           \\
-    B    & $\times$, Low Res. & $\times$, Incompat. Geo.                                    & $\boxed{\checkmark\; \text{Compat. Geo., In Range, High Res.}}$           \\
-    C    & $\times$, Low Res. & $\boxed{\checkmark\; \text{Compat. Geo., In Range, High Res.}}$           & $\times$, Low Res.                                   \\
-    F    & $\times$, Low Res. & $\boxed{\checkmark\; \text{Compat. Geo., In Range, High Res.}}$           & $\times$, Low Res.                                   \\
-    G    & $\times$, Low Res. & $\times$, Incompat. Geo.                                    & $\boxed{\checkmark\; \text{Compat. Geo., In Range, High Res.}}$           \\
-    H    & $\times$, Low Res. & $\boxed{\checkmark\; \text{Compat. Geo., In Range, High Res.}}$           & $\times$, Low Res.                                   \\
-    J    & $\times$, Low Res. & $\times$, Incompat. Geo.                                    & $\boxed{\checkmark\; \text{Compat. Geo., In Range, High Res.}}$           \\
-    K    & $\times$, Low Res. & $\times$, Incompat. Geo.                                    & $\boxed{\checkmark\; \text{Compat. Geo., In Range, High Res.}}$            \\
-    \bottomrule
-    \end{tabular}
-\end{table}
+    \includegraphics[width=0.5\textwidth]{Questions/Figures/Q4ProblemDiagram.png}
+    \caption{Cylinder rolling on a board.}
+    \label{fig:Q4 System}
+\end{figure}
 
+% As shown, the angle of tilt is denoted by θ, the torque applied to the board is τ , and q measures the
+% distance the cylinder rolls down the board. Let J denote the mass moment of inertia of the board
+% about its pivot and Jc, Rc and Mc the mass moment of inertia, radius and mass of the cylinder,
+% respectively. Assuming roll without slip, the equations of motion can be shown to be
+% write in mathmode
 
+As shown, the angle of tilt is denoted by $\theta$, the torque applied to the board is $\tau$, and $q$ 
+measures the distance the cylinder rolls down the board. Let $J$ denote the mass moment of inertia of the board 
+about its pivot and $J_c$, $R_c$ and $M_c$ the mass moment of inertia, radius and mass of the cylinder, 
+respectively. Assuming roll without slip, the equations of motion can be shown to be:
 
-\FloatBarrier
-\phantom{}
+\begin{align}
+    &\left(\frac{J_c}{R_{c}^2} + M_c\right)\ddot{q} + M_{c}g \sin{\theta} - M_{c}q \dot{\theta}^2 = 0 \label{eq: Q4a1} \\
+    &(M_{c}q^2 + J + J_c)\ddot{\theta} + 2M_{c}q \dot{q} \dot{\theta} + M_{c}gq \cos{\theta} = \tau \label{eq: Q4a2}
+\end{align}
+
+\subsection{}
+\textit{What is the order of this system?}
+
+The system consists of two 2nd order differential equations, so the order of the system is 2.
+\subsection{}
+\textit{Defining $x = (q, \theta, \dot{q}, \dot{\theta})$, $u = \tau$ and $y = q$, write the state model of this system.}
+
+Isolating the $\ddot{q}$ and $\ddot{\theta}$ terms in (\ref{eq: Q4a1}) and (\ref{eq: Q4a2}) respectively, we get:
+
+\begin{align*}
+    \ddot{q} &= \frac{1}{\frac{J_c}{R_{c}^2} + M_c} \left(M_{c}q \dot{\theta}^2 - M_{c}g \sin{\theta}\right) \\
+    \ddot{\theta} &= \frac{1}{M_{c}q^2 + J + J_c} \left(u - 2M_{c}q \dot{q} \dot{\theta} - M_{c}gq \cos{\theta}\right)
+\end{align*}
+
+The state model is therefore:
+\begin{align*}
+    \dot{x} &=
+    \begin{bmatrix}
+        \dot{q} \\
+        \dot{\theta} \\
+        \frac{1}{\frac{J_c}{R_{c}^2} + M_c} \left(M_{c}q \dot{\theta}^2 - M_{c}g \sin{\theta}\right) \\
+        \frac{1}{M_{c}q^2 + J + J_c} \left(u - 2M_{c}q \dot{q} \dot{\theta} - M_{c}gq \cos{\theta}\right)
+    \end{bmatrix} \\
+    y &= q
+\end{align*}
+
+\subsection{}
+\textit{Does the system in (b) have a state-space form? Why or why not?}
+
+The system in (b) does not have a state-space form because the state dynamics are not linear due to the presence of 
+the $q^2$, $\sin{\theta}$, $\cos{\theta}$, $\theta^2$, $2M_{c}q \dot{q} \dot{\theta}$, and various other non-linear terms.
+    
+        
 
