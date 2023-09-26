@@ -1,0 +1,62 @@
+\section{}
+\subsection{}[testetsetset]
+The following table is a summary of the accuracy, repeatability, resolution, and range of various measurement devices.
+\begin{table}[h]
+    \caption{Accuracy, Repeatability, Resolution, and Range of Various Measurement Devices}
+    \label{tab:measurement-devices}
+    \centering
+    \begin{tabular}{lcccc}
+        \toprule
+        Device & Accuracy & Repeatability & Resolution & Range \\
+        & (mm) & (mm) & (mm) & (mm) \\
+        \midrule
+        Digital Caliper & $\pm 0.04$ & 0.03 & 0.01 & (0.00, 153.90) \\
+        Micrometer & $\pm 0.013$ & 0.005 & 0.001 & (0.000, 26.886) \\
+        Vernier Caliper & $\pm 0.02$ & 0.02 & 0.02 & (0.00, 155.30) \\
+        \bottomrule
+    \end{tabular}
+\end{table}
+
+\subsection{}
+Below is a deviation table for the micrometer. The deviation from standard is calculated for each gauge block length the maximum deviation is highlighted in bold and is the accuracy. \\
+
+\begin{table}[h]
+    \caption{Gauge Block Deviation Table for Micrometer}
+    \label{tab:gauge-block-deviation-table-micrometer}
+    \centering
+    \begin{tabular}{ccccccc}
+        \toprule
+        & \multicolumn{5}{c}{Deviation From Standard} & \\
+        Gauge length & Reading 1 & Reading 2 & Reading 3 & Reading 4 & Reading 5 & Max Dev. \\
+        (mm) & (mm) & (mm) & (mm) & (mm) & (mm) & (mm) \\
+        \midrule
+        0.000 & 0.000 & 0.000 & 0.000 & 0.000 & 0.000 & 0.000 \\
+        2.008 & 0.003 & 0.002 & 0.001 & 0.002 & 0.002 & 0.002 \\
+        10.000 & 0.003 & 0.003 & 0.004 & 0.003 & 0.003 & 0.001 \\
+        14.000 & 0.011 & 0.009 & 0.010 & 0.010 & 0.010 & 0.002 \\
+        20.000 & 0.007 & 0.006 & 0.005 & 0.004 & 0.005 & 0.003 \\
+        25.000 & 0.011 & 0.010 & \textbf{0.013} & 0.011 & 0.008 & \textbf{0.005} \\
+        \bottomrule
+    \end{tabular}
+\end{table}
+
+\noindent The repeatability is simply the maximum deviation minus the minimum deviation. The maximum deviation is highlighted in bold and is the repeatability.\\
+
+\noindent Sample calculation for the 2.008mm gauge block length deviation from standard:
+\begin{empheq}[]{align}
+    \text{Deviation from Standard} &= \text{Reading} - \text{Standard} \nonumber \\
+    &= 2.008 - 2.005 \nonumber \\
+    &= \boxed{0.003} \nonumber
+\end{empheq}
+
+\noindent Sample calculation for the maximum deviation for the 25.000mm gauge block length:
+\begin{empheq}[]{align}
+    \text{Max Deviation} &= \text{Max Reading} - \text{Min Reading} \nonumber \\
+    &= 0.013 - 0.008 \nonumber \\
+    &= \boxed{0.005} \nonumber
+\end{empheq}
+
+\noindent To obtain the accuracy, the maximum deviation is taken from the deviation table. That is, ${\text{accuracy} = \text{max}(\text{all deviations}) = 0.013 \; \text{mm}}$. \\
+
+\noindent Similarly, the repeatability is obtained by taking the maximum deviation minus the minimum deviation. That is, ${\text{repeatability} = \text{max}(\text{max deviation per gauge block}) = 0.005 \; \text{mm}}$.
+

@@ -1,0 +1,133 @@
+\FloatBarrier
+\section{}
+\subsection{}
+The sample standard deviation for the sample measurements for F can simply be calculated using the following equation:
+
+\begin{equation}
+    \sigma = \sqrt{\frac{\sum_{i=1}^{n} (x_i - \bar{x})^2}{n-1}} \nonumber
+\end{equation}
+
+\noindent Allowing Excel to handle the calculation, the standard dev is $0.001906 \; \text{mm}$. The next value of interest is the one-sided inverse t-distribution value. 
+This was calculated using Excel where a confidence level of $95\%$ was used, with $v = n-1$ degrees of freedom which corresponds to $\alpha = 1 - 0.95 = 0.05$ and $v = 20-1 = 19$.
+The value is $t_{0.05/2, 4} = 2.0930$. The precision can now be calculated using the following equation:
+
+\begin{equation}
+    P_{x} = \frac{t_{\alpha/2, v} \sigma}{\sqrt{n}} = \frac{2.0930 \times 0.001906}{\sqrt{19}} = \pm 0.0008919 \; \text{mm} = \boxed{\pm 0.001 \; \text{mm}} \nonumber
+\end{equation}
+
+\noindent Using the results from Table \ref{tab:measurement-devices}, the accuracy of the micrometer is $B_{x} = 0.013 \; \text{mm}$. 
+The total uncertainty is calculated using the following equation:
+\begin{equation}
+    \delta s_{\text{F}} = \sqrt{P_{x}^2 + B_{x}^2} = \sqrt{(0.0008919)^2 + (0.013)^2} = \pm 0.01303 \;\text{mm} = \boxed{\pm 0.013 \; \text{mm}} \nonumber
+\end{equation}
+
+\noindent A table summary of all the uncertainties for the measured dimensions is shown below:
+\begin{table}[h]
+    \centering
+    \caption{Uncertainty of Measured Dimensions of Block 22}
+    \label{tab:uncertainty-measured-dimensions-block-22}
+    \begin{tabular}{llccccccc}
+        \toprule
+        Dim. & Device          & Acc.               & STDEV     & T-Dist Inv.& P             & U     & Value   \\
+             & (mm)            & (mm)               & (mm)      & (mm)           & (mm)  & (mm)  & (mm)    \\
+        \midrule
+        A    & Digital Caliper & 0.04               & 3.468E-02 & 2.0930         & 0.02  & 0.04  & 66.42   \\
+        B    & Digital Caliper & 0.04               & 8.367E-03 & 2.7764         & 0.01  & 0.04  & 12.60   \\
+        C    & Digital Caliper & 0.04               & 8.944E-03 & 2.7764         & 0.01  & 0.04  & 6.51    \\
+        C    & Calculated      & N/A                & N/A       & N/A            & N/A   & 0.223 & 6.417   \\
+        D    & Calculated      & N/A                & N/A       & N/A            & N/A   & 0.05  & 18.05   \\
+        E    & Calculated      & N/A                & N/A       & N/A            & N/A   & 0.06  & 16.10   \\
+        F    & Micrometer      & 0.013              & 1.906E-03 & 2.0930         & 0.001 & 0.013 & 16.087  \\
+        G    & Vernier Caliper & 0.02               & 7.327E-03 & 2.0930         & 0.00  & 0.02  & 43.80   \\
+        H    & Micrometer      & 0.013              & 1.788E-01 & 2.7764         & 0.222 & 0.222 & 9.669   \\
+        J    & Digital Caliper & 0.04               & 2.881E-02 & 2.7764         & 0.04  & 0.05  & 9.80    \\
+        K    & Digital Caliper & 0.04               & 5.477E-03 & 2.7764         & 0.01  & 0.04  & 11.75   \\
+        \bottomrule
+    \end{tabular}
+\end{table}
+
+%xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+
+\FloatBarrier
+\subsection{}
+\noindent From geometry, it can be observed that measurement D, \(s_{\text{D}}\), can be calculated using the following equation:
+\begin{empheq}[]{align}
+    s_{\text{D}} &= s_{\text{K}} + \frac{s_{\text{B}}}{2} = f(s_{\text{K}}, s_{\text{B}}) \nonumber \\
+            &= 11.75 + \frac{12.60}{2} \nonumber \\
+            &= \boxed{18.05 \; \text{mm}} \nonumber
+\end{empheq}
+
+
+\noindent Simply plugging in the numbers yields us the measurement D, ${s_{\text{D}} = 18.05 \; \text{mm}}$. The uncertainty of D, \(\delta s_{\text{D}}\), can be calculated using the following equation:
+\begin{empheq}[]{align}
+    \delta s_{\text{D}} &= \sqrt{\left(\frac{\partial f}{\partial s_{\text{K}}}\right)^2 (\delta s_{\text{K}})^2 + \left(\frac{\partial f}{\partial s_{\text{B}}}\right)^2 (\delta s_{\text{B}})^2} \nonumber \\
+            &= \sqrt{(1)^2 (\delta s_{\text{K}})^2 + \left(\frac{1}{2}\right)^2 (\delta s_{\text{B}})^2} \nonumber \\
+            &= \sqrt{(\delta s_{\text{K}})^2 + \frac{1}{4} (\delta s_{\text{B}})^2} \nonumber \\
+            &= \sqrt{(0.04)^2 + \frac{1}{4} (0.04)^2} \nonumber \\
+            &= {0.046 \; \text{mm}} \nonumber \\
+            &= \boxed{0.05 \; \text{mm}} \nonumber
+\end{empheq}
+        
+\noindent Plugging in the values from Table \ref{tab:uncertainty-measured-dimensions-block-22} yields us the uncertainty of D, ${\delta s_{\text{D}} = 0.046 \; \text{mm}}$. 
+That means the measurement for D is:
+\begin{equation}
+    \boxed{s_{\text{D}} = 18.05 \pm 0.05 \; \text{mm}} \nonumber
+\end{equation}
+
+%xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+
+\subsection{}
+Let us calculate measurement C'. From geometry, it can be observed that measurement C', can be calculated using the following equation:
+\begin{empheq}[]{align}
+    s_{\text{C'}} &= s_{\text{F}} - s_{\text{H}} = f(s_{\text{F}}, s_{\text{H}}) \nonumber \\
+            &= 16.087 - 9.669 \nonumber \\
+            &= \boxed{6.417 \; \text{mm}} \nonumber
+\end{empheq}
+
+\noindent Plugging in the numbers yields us the measurement C, $s_{\text{C'}} = 6.417 \; \text{mm}$. 
+The uncertainty of C, \(\delta s_{\text{C}}\), can be calculated using the following equation:
+
+\begin{empheq}[]{align}
+    \delta s_{\text{C'}} &= \sqrt{\left(\frac{\partial f}{\partial s_{\text{F}}}\right)^2 (\delta s_{\text{F}})^2 + \left(\frac{\partial f}{\partial s_{\text{H}}}\right)^2 (\delta s_{\text{H}})^2} \nonumber \\
+             &= \sqrt{(1)^2 (\delta s_{\text{F}})^2 + (-1)^2 (\delta s_{\text{H}})^2} \nonumber \\
+             &= \sqrt{(\delta s_{\text{F}})^2 + (\delta s_{\text{H}})^2} \nonumber \\
+            &= \sqrt{(0.013)^2 + (0.222)^2} \nonumber \\
+            &= \boxed{0.226 \; \text{mm}} \nonumber
+\end{empheq}
+
+\noindent Plugging in the values from Table \ref{tab:uncertainty-measured-dimensions-block-22} yields us the uncertainty of C, $\delta s_{\text{C'}} = 0.226 \; \text{mm}$. 
+That means the measurement for C is:
+
+\begin{equation}
+    \boxed{s_{\text{C'}} = 6.417 \pm 0.226 \; \text{mm}} \nonumber
+\end{equation}
+
+\noindent The measured value for C was $6.51 \pm 0.04 \; \text{mm}$. The measured value is not within the uncertainty range of the calculated value. 
+This is likely due to the bore hole having a taper, which would make measuring the bottom of the bore hole difficult. 
+The measured value is likely smaller as a result and agrees with experimental data.
+
+%xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+
+\subsection{}
+\noindent From geometry, it can be observed that measurement E, can be calculated using the following equation:
+\begin{empheq}[]{align}
+    s_{\text{E}} &= s_{\text{j}} + \frac{s_{\text{B}}}{2} = f(s_{\text{j}}, s_{\text{B}}) \nonumber \\
+            &= 9.80 + \frac{12.60}{2} \nonumber \\
+            &= \boxed{16.10 \; \text{mm}} \nonumber
+\end{empheq}
+
+\noindent From differential calculus, the uncertainty of E, \(\delta s_{\text{E}}\), can be calculated using the following equation:
+\begin{empheq}[]{align}
+    \delta s_{\text{E}} &= \sqrt{\left(\frac{\partial f}{\partial s_{\text{j}}}\right)^2 (\delta s_{\text{j}})^2 + \left(\frac{\partial f}{\partial s_{\text{B}}}\right)^2 (\delta s_{\text{B}})^2} \nonumber \\
+            &= \sqrt{(1)^2 (\delta s_{\text{j}})^2 + \left(\frac{1}{2}\right)^2 (\delta s_{\text{B}})^2} \nonumber \\
+            &= \sqrt{(\delta s_{\text{j}})^2 + \frac{1}{4} (\delta s_{\text{B}})^2} \nonumber \\
+            &= \sqrt{(0.05)^2 + \frac{1}{4} (0.04)^2} \nonumber \\
+            &= \boxed{0.06 \; \text{mm}} \nonumber
+\end{empheq}
+
+\noindent Plugging everything in, 
+\begin{equation}
+    \boxed{s_{\text{E}} = 16.10 \pm 0.06 \; \text{mm}} \nonumber
+\end{equation}
+
+\noindent The summary table was shown in Table \ref{tab:uncertainty-measured-dimensions-block-22}.
