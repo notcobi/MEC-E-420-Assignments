@@ -1,5 +1,5 @@
 # Fdb version 4
-["pdflatex"] 1695722921 "c:/Users/Alex/Documents/LaTeX/MEC E 420/A1/main.tex" "main.pdf" "main" 1695722923 0
+["pdflatex"] 1695790525 "c:/Users/Alex/Documents/LaTeX/MEC E 420/A1/main.tex" "main.pdf" "main" 1695790528 0
   "C:/Users/Alex/AppData/Local/MiKTeX/fonts/map/pdftex/pdftex.map" 1695709900 80909 eab91d9745dd2edfd62a31d53cd5fe15 ""
   "C:/Users/Alex/AppData/Local/MiKTeX/fonts/pk/ljfour/jknappen/ec/dpi600/tcrm1200.pk" 1695709794 14064 4513ebfbc7774ae940c68799a263b49a ""
   "C:/Users/Alex/AppData/Local/MiKTeX/miktex/data/le/pdftex/pdflatex.fmt" 1695700950 24141477 601480e762a236c8fe40ab3309037a0b ""
@@ -226,13 +226,13 @@
   "Questions/Figures/Q2ProblemDiagram.png" 1695710259 13865 ec82b04eecfca32e184553be86384ffb ""
   "Questions/Figures/Q3ProblemDiagram.png" 1695712242 18674 a59f029f5db61085e7bb4adf7477ab2e ""
   "Questions/Figures/Q4ProblemDiagram.png" 1695715225 33079 5396de09ca144fe32dd5a12ebc4ab05d ""
-  "Questions/Q1.tex" 1695710491 1771 2f673ed5fee53dc0cdc136edd4732b30 ""
+  "Questions/Q1.tex" 1695790522 1771 2f673ed5fee53dc0cdc136edd4732b30 ""
   "Questions/Q2.tex" 1695713957 2817 724297b5135c100e04d34be1712bf24f ""
   "Questions/Q3.tex" 1695715123 2149 ca4de7513cf2abb83464f6a0967da146 ""
   "Questions/Q4.tex" 1695722919 2755 9804a58583f0bd73c2bd35ca5c4d089a ""
   "c:/Users/Alex/Documents/LaTeX/MEC E 420/A1/main.tex" 1695717177 3250 22be25d4c871ebc4e5bb980b75881955 ""
-  "main.aux" 1695722923 3079 39513ff68b38e07ed401b355b33dc9e1 "pdflatex"
-  "main.out" 1695722923 585 32c705000c8a3714054e4f4cf851fff6 "pdflatex"
+  "main.aux" 1695790527 3079 39513ff68b38e07ed401b355b33dc9e1 "pdflatex"
+  "main.out" 1695790527 585 32c705000c8a3714054e4f4cf851fff6 "pdflatex"
   (generated)
   "main.aux"
   "main.log"
