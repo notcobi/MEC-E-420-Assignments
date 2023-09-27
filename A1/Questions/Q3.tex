@@ -47,7 +47,7 @@ By KCL, $x_2 = i_{L} = i_{R2}$. Further manipulation of (\ref{eq:KVL2}) yields:
 \end{align}
 
 The state space form is therefore:
-\begin{align}
+\begin{empheq}[box=\fbox]{align*}
     x &=
     \begin{bmatrix}
         \dot{x_1} \\
@@ -55,7 +55,7 @@ The state space form is therefore:
     \end{bmatrix}
     =
     \begin{bmatrix}
-        -\frac{R_{1}}{C} & 0 \\
+        -\frac{1}{CR_{1}} & 0 \\
         0 & -\frac{R_{2}}{L}
     \end{bmatrix}
     \begin{bmatrix}
@@ -64,7 +64,7 @@ The state space form is therefore:
     \end{bmatrix}
     +
     \begin{bmatrix}
-        \frac{1}{C} \\
+        \frac{1}{C R_{1}} \\
         \frac{1}{L} 
     \end{bmatrix}
     \begin{bmatrix}
@@ -72,10 +72,10 @@ The state space form is therefore:
     \end{bmatrix} \\
     y &= 
     \begin{bmatrix}
-        0 & 1
+        0 & R_2
     \end{bmatrix}
     \begin{bmatrix}
         x_1 \\
         x_2
     \end{bmatrix}
-\end{align}
+\end{empheq}

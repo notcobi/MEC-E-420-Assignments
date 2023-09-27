@@ -18,35 +18,34 @@ respectively. The output is the position of the second cart $q_2$.
 Since both carts are moving, the damper is applying a force based on the relative velocity of the two carts. The equation of motion for the first cart is:
 
 \begin{equation}
-    M_1\ddot{q_1} = F - D(\dot{q_2} - \dot{q_1}) \nonumber
+    \boxed{M_1\ddot{q_1} = F - D(\dot{q_2} - \dot{q_1})} \nonumber
 \end{equation}
 
 By Newton's Third Law, the damping force on the second cart is equal and opposite to the damping force on the first cart. The equation of motion for the second cart is:
 
 \begin{equation}
-    M_2\ddot{q_2} = D(\dot{q_2} - \dot{q_1}) \nonumber
+    \boxed{M_2\ddot{q_2} = D(\dot{q_2} - \dot{q_1})} \nonumber
 \end{equation}
 
 \subsection{}
-%\textit{Introduce the state variables x1 = q1, x2 = q2, x3 = ˙q1, x4 = ˙q2. Obtain the state model of this system.}
-% use math mode for the problem statement
 \textit{Introduce the state variables $x_1 = q_1$, $x_2 = q_2$, $x_3 = \dot{q_1}$, $x_4 = \dot{q_2}$. Obtain the state model of this system.}
 
 In addition to the above state variables, let the system input be $u = F$. The state model of this system is:
 
-\begin{align*}
+% begin empheq wiht box
+\begin{empheq}[box=\fbox]{align*}
     \dot{x_1} &= x_3 \\
     \dot{x_2} &= x_4 \\
     \dot{x_3} &= \frac{1}{M_1}u - \frac{D}{M_1}(x_4 - x_3) \\
     \dot{x_4} &= \frac{D}{M_2}(x_4 - x_3) \\
     y &= x_2
-\end{align*}
+\end{empheq}
 
 \subsection{}
 \textit{Obtain the state-space form of this system.}
 
 By inspection, the state dynamics are linear, and the output is linear. Rewriting the state model in matrix form:
-\begin{align*}
+\begin{empheq}[box=\fbox]{align*}
     x &=
     \begin{bmatrix}
         \dot{x_1} \\
@@ -94,4 +93,4 @@ By inspection, the state dynamics are linear, and the output is linear. Rewritin
     \begin{bmatrix}
         u \\
     \end{bmatrix}
-\end{align*}
+\end{empheq}

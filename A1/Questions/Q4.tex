@@ -1,6 +1,6 @@
 \section{}
 Consider a cylinder rolling on a board, with a torque applied to the latter:
-\begin{figure}
+\begin{figure}[h]
     \centering
     \includegraphics[width=0.5\textwidth]{Questions/Figures/Q4ProblemDiagram.png}
     \caption{Cylinder rolling on a board.}
@@ -38,7 +38,7 @@ Isolating the $\ddot{q}$ and $\ddot{\theta}$ terms in (\ref{eq: Q4a1}) and (\ref
 \end{align*}
 
 The state model is therefore:
-\begin{align*}
+\begin{empheq}[box=\fbox]{align*}
     \dot{x} &=
     \begin{bmatrix}
         \dot{q} \\
@@ -47,7 +47,7 @@ The state model is therefore:
         \frac{1}{M_{c}q^2 + J + J_c} \left(u - 2M_{c}q \dot{q} \dot{\theta} - M_{c}gq \cos{\theta}\right)
     \end{bmatrix} \\
     y &= q
-\end{align*}
+\end{empheq}
 
 \subsection{}
 \textit{Does the system in (b) have a state-space form? Why or why not?}
