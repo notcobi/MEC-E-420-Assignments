@@ -1,5 +1,5 @@
 # Fdb version 4
-["pdflatex"] 1695791635 "c:/Users/User/Documents/School/Year 3/MEC-E-420-Assignments/A1/main.tex" "main.pdf" "main" 1695791647 0
+["pdflatex"] 1695838485 "c:/Users/User/Documents/School/Year 3/MEC-E-420-Assignments/A1/main.tex" "main.pdf" "main" 1695838494 0
   "C:/Users/User/AppData/Local/MiKTeX/fonts/map/pdftex/pdftex.map" 1695753678 80909 eab91d9745dd2edfd62a31d53cd5fe15 ""
   "C:/Users/User/AppData/Local/MiKTeX/fonts/pk/ljfour/jknappen/ec/dpi600/tcrm1200.pk" 1695753682 14064 388aeca2ba5ed4633cf10974288bf093 ""
   "C:/Users/User/AppData/Local/MiKTeX/miktex/data/le/pdftex/pdflatex.fmt" 1695753568 24141477 3a9476bb8d9827eec0d41331d6b8f7a8 ""
@@ -227,12 +227,12 @@
   "Questions/Figures/Q3ProblemDiagram.png" 1695791594 18674 8446548ec394611d84cabe204a3a64f5 ""
   "Questions/Figures/Q4ProblemDiagram.png" 1695791594 33079 8ef3061a00b63eb825a9b643022dd47f ""
   "Questions/Q1.tex" 1695791594 1805 2f673ed5fee53dc0cdc136edd4732b30 ""
-  "Questions/Q2.tex" 1695791594 2829 b1331c7ef24a1b6cae82357950d65697 ""
+  "Questions/Q2.tex" 1695838482 2780 85db3b6643141de4388a38e1332da70f ""
   "Questions/Q3.tex" 1695791594 2261 4b2b8135df6921bc5ab9e3c98d1bdf5b ""
   "Questions/Q4.tex" 1695791594 2836 441f0b92a033f97b40a1334e9593de35 ""
   "c:/Users/User/Documents/School/Year 3/MEC-E-420-Assignments/A1/main.tex" 1695791620 3360 b54999c275f9e56838747b21c3253f6d ""
-  "main.aux" 1695791645 3079 650ded2e051f3adb31cd0b534919b007 "pdflatex"
-  "main.out" 1695791645 585 32c705000c8a3714054e4f4cf851fff6 "pdflatex"
+  "main.aux" 1695838493 3079 650ded2e051f3adb31cd0b534919b007 "pdflatex"
+  "main.out" 1695838493 585 32c705000c8a3714054e4f4cf851fff6 "pdflatex"
   "main.tex" 1695791620 3360 b54999c275f9e56838747b21c3253f6d ""
   (generated)
   "main.aux"
