@@ -7,4 +7,4 @@ A =[2, -1; -1, 2];
 
 V = -sqrt(2)*V;
 V*expm(D*t)
-V*expm(D*t)*V^-1
+V*expm(D*t)*V^-1 
