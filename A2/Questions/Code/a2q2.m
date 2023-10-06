@@ -21,9 +21,11 @@ dhdu = jacobian(h, u);
 % Substitute in the equilibrium point
 A = subs(dfdx, [x1 x2 x3 x4 u], [x_10 0 0 0 M_c*g*x_10]);
 B = subs(dfdu, [x1 x2 x3 x4 u], [x_10 0 0 0 M_c*g*x_10]);
+C = dhdx;
+D = dhdu;
 
 % Print the result 
 pretty(A)
 pretty(B)
-
-
+pretty(C)
+pretty(D)

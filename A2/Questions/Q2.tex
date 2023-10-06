@@ -1,95 +1,105 @@
 \section{}
-Consider the following system consisting of two carts connected by a damper:
+Recall the rolling-cylinder-on-a-board system from Assignment \#1:
 \begin{figure}[h]
     \centering
     \includegraphics[width=0.5\textwidth]{Questions/Figures/Q2ProblemDiagram.png}
-    \caption{System consisting of two carts connected by a damper.}
+    \caption{Rolling cylinder on a board.}
     \label{fig:Q2 System}
 \end{figure}
 
-The input is the force $F$ applied to the first cart, while $q_1$ and $q_2$ are the positions of the first and second cart, 
-respectively. The output is the position of the second cart $q_2$.
+% In Assignment#1, defining the state vector x = (x1, x2, x3, x4) = (q, θ, q,˙
+% ˙θ), input u = τ and output
+% y = q, you obtained the state model
+
+In Assignment \#1, defining the state vector $x = [x_1, x_2, x_3, x_4] = 
+[q, \theta, \dot{q}, \dot{\theta}]$, input $u = \tau$ and output $y = q$, you obtained the state model
+\[
+    \begin{aligned}
+        \dot{x} &=
+        \begin{bmatrix}
+            x_3 \\
+            x_4 \\
+            \frac{-M_c g \sin x_2 + M_c x_1 x_4^2}{\frac{J_c}{R_c^2} + M_c} \\
+            \frac{- 2M_c x_1 x_3 x_4 - M_c g x_1 \cos x_2 + u}{M_c x_1^2 + J + J_c}
+        \end{bmatrix} 
+            = f(x, u) \\
+        y &= x_1
+    \end{aligned}
+\]
 
 \subsection{}
-\textit{Using Newton’s Second Law, obtain the equations of motion of the system.}
+\textit{Find the two equilibrium points of this system}
 
-% Figure to be included later
+An equilibrium point is defined as a state $x_0 = [x_{10}, x_{20}, x_{30}, x_{40}]$ and input $u_0$ that satisfies $f(x_0, u_0) = 0$. 
+Working through some algebra, we get the following the following observations:
+\[
+    \begin{aligned}
+        &x_{30} = 0 \\
+        &x_{40} = 0 \\
+        &\frac{-M_c g \sin x_{20} + \cancel{M_c x_{10} x_{40}^2}}{\frac{J_c}{R_c^2} + M_c} = 0 \\
+        &\frac{\cancel{- 2M_c x_{10} x_{30} x_{40}} - M_c g x_{10} \cos x_{20} + u_0}{M_c x_{10}^2 + J + J_c} = 0 \\
+        &\dot{x_{10}} = 0
+    \end{aligned}
+\]
 
-Since both carts are moving, the damper is applying a force based on the relative velocity of the two carts. The equation of motion for the first cart is:
+We see that $x_{30} = x_{40} = 0$ and $x_{10} \in \mathbb{R}$. Next, solve for $x_{20}$:
+\[
+    \begin{aligned}
+        \frac{-M_c g \sin x_{20}}{\frac{J_c}{R_c^2} + M_c} &= 0 \\
+        \implies \sin x_{20} &= 0 \\
+        x_{20} &= 0, \pi
+    \end{aligned}
+\]
 
-\begin{equation}
-    \boxed{M_1\ddot{q_1} = F - D(\dot{q_1} - \dot{q_2})} \nonumber
-\end{equation}
+Finally, solve for $u_0$:
+\[
+    \begin{aligned}
+        \frac{- M_c g x_{10} \cos x_{20} + u_0}{M_c x_{10}^2 + J + J_c} &= 0 \\
+        \implies u_0 &= M_c g x_{10} \cos x_{20} \\
+        u_0 &= \pm M_c g x_{10}
+    \end{aligned}
+\]
 
-By Newton's Third Law, the damping force on the second cart is equal and opposite to the damping force on the first cart. The equation of motion for the second cart is:
-
-\begin{equation}
-    \boxed{M_2\ddot{q_2} = D(\dot{q_1} - \dot{q_2})} \nonumber
-\end{equation}
-
-\subsection{}
-\textit{Introduce the state variables $x_1 = q_1$, $x_2 = q_2$, $x_3 = \dot{q_1}$, $x_4 = \dot{q_2}$. Obtain the state model of this system.}
-
-In addition to the above state variables, let the system input be $u = F$. The state model of this system is:
-
+Therefore, the two equilibrium points are:
 \begin{empheq}[box=\fbox]{align*}
-    \dot{x_1} &= x_3 \\
-    \dot{x_2} &= x_4 \\
-    \dot{x_3} &= \frac{1}{M_1}(u - D(x_3 - x_4)) \\
-    \dot{x_4} &= \frac{1}{M_2}(D(x_3 - x_4))
+        x_{0,1} &= [x_{10}, 0, 0, 0] \\
+        u_{0,1} &= M_c g x_{10} \\
+        x_{0,2} &= [x_{10}, \pi, 0, 0] \\
+        u_{0,2} &= -M_c g x_{10}
 \end{empheq}
 
 \subsection{}
-\textit{Obtain the state-space form of this system.}
+\textit{One of these is mathematically valid but not physically relevant. Which one and why?}'
 
-By inspection, the state dynamics are linear, and the output is linear. Rewriting the state model in matrix form:
+The second equilibrium point is not physically relevant because the fulcrum limits the range of motion of the board. In addition, by the time the 
+board reaches $\theta = \pi$, the cylinder would have rolled off the board.
+
+\subsection{}
+\textit{Using MATLAB, linearize the system about the relevant equilibrium point and give the corresponding A, B, C and D matrices.}
+
+By Matlab,
+
 \begin{empheq}[box=\fbox]{align*}
-    x &=
-    \begin{bmatrix}
-        \dot{x_1} \\
-        \dot{x_2} \\
-        \dot{x_3} \\
-        \dot{x_4}
-    \end{bmatrix}
-    =
+    A &=
     \begin{bmatrix}
         0 & 0 & 1 & 0 \\
         0 & 0 & 0 & 1 \\
-        0 & 0 & -\frac{D}{M_1} & \frac{D}{M_1} \\
-        0 & 0 & \frac{D}{M_2} & -\frac{D}{M_2}
-    \end{bmatrix}
-    \begin{bmatrix}
-        x_1 \\
-        x_2 \\
-        x_3 \\
-        x_4
-    \end{bmatrix}
-    +
-    \begin{bmatrix}
-        0 \\
-        0 \\
-        \frac{1}{M_1} \\
-        0
-    \end{bmatrix}
-    \begin{bmatrix}
-        u \\
+        0 & -\frac{M_c g}{M_c + \frac{J_c}{R_c^2}} & 0 & 0 \\
+        -\frac{M_c g}{M_c x_{10}^2 + J + J_c} & 0 & 0 & 0
     \end{bmatrix} \\
-    y &=
+    B &=
     \begin{bmatrix}
-        0 & 1 & 0 & 0
-    \end{bmatrix}
+        0 \\
+        0 \\
+        0 \\
+        \frac{1}{M_c x_{10}^2 + J + J_c}
+    \end{bmatrix} \\
+    C &=
     \begin{bmatrix}
-        x_1 \\
-        x_2 \\
-        x_3 \\
-        x_4
-    \end{bmatrix}
-    +
-    \begin{bmatrix}
-        0
-    \end{bmatrix}
-    \begin{bmatrix}
-        u \\
-    \end{bmatrix}
+        1 & 0 & 0 & 0
+    \end{bmatrix} \\
+    D &= 0
 \end{empheq}
-    
+
+The Matlab code used to generate the above matrices is shown below:
+\lstinputlisting[language=Matlab]{Questions/Code/a2q2.m}
