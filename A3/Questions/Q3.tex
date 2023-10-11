@@ -43,29 +43,75 @@ By cover-up,
     B &= \frac{16s^2 + 23s + 13}{(s + 2)} \bigg|_{s = -1} \\
     &= \frac{16(-1)^2 + 23(-1) + 13}{(-1 + 2)} \\
     &= 6 \\
-    C = \frac{16s^2 + 23s + 13}{(s + 1)^2} \bigg|_{s = -2} &= 13
+    C &= \frac{16s^2 + 23s + 13}{(s + 1)^2} \bigg|_{s = -2} \\
+    &= \frac{16(-2)^2 + 23(-2) + 13}{(-2 + 1)^2} \\
+    &= 31 \\
     A &= \frac{d}{ds} \left[ \frac{16s^2 + 23s + 13}{(s + 2)} \right] \bigg|_{s = -1} \\
-
-
+    &= \frac{(s+2)(32s + 23) - (16s^2 + 23s + 13)(1)}{(s + 2)^2} \bigg|_{s = -1} \\
+    &= \frac{(-1+2)(-32 + 23) - (16 - 23 + 13)}{(-1 + 2)^2} \\
+    &= -15
+\end{aligned}
 \]
 
-Solving this system of equations, we get $A = 3$, $B = 2$, and $C = 13$.
+Solving this system of equations, we get $A = -15$, $B = 6$, and $C = 31$.
+
+The partial fraction expansion of $F(s)$ is therefore:
+\begin{empheq}[box=\fbox]{align*}
+    F(s) = \frac{16s^2 + 23s + 13}{(s + 1)^2(s + 2)} &= \frac{-15}{s + 1} + \frac{6}{(s + 1)^2} + \frac{31}{s + 2}
+\end{empheq}
 
 \subsection{}
 Using MATLAB's \texttt{partfrac} command, we get the following result.
 
 \begin{verbatim}
+>> syms s
 >> partfrac(16*s^2 + 23*s + 13, (s + 1)^2*(s + 2))
 
 ans =
 
-     3/(s + 1) + 2/(s + 1)^2 + 13/(s + 2)
+    6/(s + 1)^2 - 15/(s + 1) + 31/(s + 2)
 \end{verbatim}
 
 \subsection{}
 Using the inverse Laplace Transform, we get the following result.
 
-\begin{align*}
+\[
+\begin{aligned}
     f(t) &= \mathcal{L}^{-1} \left\{ \frac{16s^2 + 23s + 13}{(s + 1)^2(s + 2)} \right\} \\
-    &= \mathcal{L}^{-1} \left\{ \frac{3}{s + 1} + \frac{2}{(s + 1)^2} + \frac{13}{s + 2} \right\} \\
-    &= \mathcal{L}^{-1} \left\{ \frac{3}{s + 1} \right\} + \math
+    &= \mathcal{L}^{-1} \left\{ \frac{-15}{s + 1} + \frac{6}{(s + 1)^2} + \frac{31}{s + 2} \right\} \\
+    &= \mathcal{L}^{-1} \left\{ \frac{-15}{s + 1} \right\} + \mathcal{L}^{-1} \left\{ \frac{6}{(s + 1)^2} \right\} + \mathcal{L}^{-1} \left\{ \frac{31}{s + 2} \right\} \\
+\end{aligned}
+\]
+
+From the table of Laplace Transforms, the following Laplace relations are of use:
+\[
+\begin{aligned}
+    \mathcal{L}\{t e^{at}\} &= \frac{1}{(s - a)^2} \\
+    \mathcal{L}\{e^{at}\} &= \frac{1}{s - a}
+\end{aligned}    
+\]
+
+Therefore,
+
+\[
+\begin{aligned}
+    \boxed{f(t) = -15e^{-t} + 6te^{-t} + 31e^{-2t}}
+\end{aligned}
+\]
+
+Again this can be verified by Matlab using the following commands.
+\begin{verbatim}
+>> syms t
+>> ilaplace(partfrac(16*s^2 + 23*s + 13, (s + 1)^2*(s + 2)))
+
+ans =
+    6/(s + 1)^2 - 15/(s + 1) + 31/(s + 2)
+\end{verbatim}
+
+Taking the limit as $t \to \infty$, we get the following result.
+\begin{empheq}[box=\fbox]{align*}
+    \lim_{t \to \infty} f(t) &= \lim_{t \to \infty} \left(-15e^{-t} + 6te^{-t} + 31e^{-2t}\right)\\
+    &= 0 + 0 + 0 \\
+    &= 0
+\end{empheq}
+
