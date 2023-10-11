@@ -1,8 +1,0 @@
-% Find eigenvalues and eigenvectors of the matrix
-sym t
-A =[2, -1; -1, 2];
-[V, D] = eig(A);
-
-V = -sqrt(2)*V;
-
-expm(D*t)

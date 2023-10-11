@@ -1,0 +1,16 @@
+\sectionfont{\large}
+\section{Appendix: Matplotlib Python Code to Render Graphs}
+This is just some random code.
+\begin{lstlisting}[language=Python]
+if transactions: Transaction.create_transactions() # if transactions = "true"
+node.generate_emptyState() # empty state for all nodes
+S.initial_events() # initiate initial events to start with
+
+while not queue.isEmpty() and clock <= targetTime:
+    next_e = queue.get_next_event()
+    clock = next_e.time # move clock to the time of the event
+    Event.execute_event(next_e)
+    Queue.remove_event(next_e)
+
+print results
+\end{lstlisting}

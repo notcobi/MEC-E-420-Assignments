@@ -1,0 +1,71 @@
+\section{}
+Consider the Laplace Transform of $f(t)$ given by
+\[
+    F(s) = \frac{16s^2 + 23s + 13}{(s + 1)^2(s + 2)}
+\]
+
+\begin{enumerate}[label=(\alph*)]
+    \item What are the poles of $F(s)$?
+    \item Using the Final Value Theorem, predict the behaviour of $f(t)$ as $t \to \infty$
+    \item By hand, obtain the partial fraction expansion of $F(s)$
+    \item Use MATLAB's \texttt{partfrac} to confirm your result; provide the input commands you used.
+    \item Obtain $f(t)$, and confirm the prediction from (b) holds. Hint: $\lim_{t \to \infty} te^{-t} = 0$
+\end{enumerate}
+
+\subsection{}
+The poles of $F(s)$ are $s = -1$ and $s = -2$. The pole at $s = -1$ has a multiplicity of 2.
+
+\subsection{}
+Using the Final Value Theorem, we can see the contribution of each pole.
+
+\begin{enumerate}
+    \item $s = -1$ has a multiplicity of 2, so the contribution will be $e^{-t}$ and $te^{-t}$.
+    \item $s = -2$ has a multiplicity of 1, so the contribution will be $e^{-2t}$.
+\end{enumerate}
+
+Therefore, as $t \to \infty$, $f(t) \to 0$. This is statement 3 of the Final Value Theorem in the course notes.
+
+\subsection{}
+By the Heaviside Cover-up Method, we can obtain the partial fraction expansion of $F(s)$.
+
+\[
+\begin{aligned}
+    F(s) &= \frac{16s^2 + 23s + 13}{(s + 1)^2(s + 2)} \\
+    &= \frac{A}{s + 1} + \frac{B}{(s + 1)^2} + \frac{C}{s + 2} \\
+    &= \frac{A(s + 1)(s + 2) + B(s + 2) + C(s + 1)^2}{(s + 1)^2(s + 2)} \\
+    &= \frac{(A + C)s^2 + (3A + 2B + 2C)s + (2A + B + C)}{(s + 1)^2(s + 2)}
+\end{aligned}
+\]
+
+By cover-up,
+\[
+\begin{aligned}
+    B &= \frac{16s^2 + 23s + 13}{(s + 2)} \bigg|_{s = -1} \\
+    &= \frac{16(-1)^2 + 23(-1) + 13}{(-1 + 2)} \\
+    &= 6 \\
+    C = \frac{16s^2 + 23s + 13}{(s + 1)^2} \bigg|_{s = -2} &= 13
+    A &= \frac{d}{ds} \left[ \frac{16s^2 + 23s + 13}{(s + 2)} \right] \bigg|_{s = -1} \\
+
+
+\]
+
+Solving this system of equations, we get $A = 3$, $B = 2$, and $C = 13$.
+
+\subsection{}
+Using MATLAB's \texttt{partfrac} command, we get the following result.
+
+\begin{verbatim}
+>> partfrac(16*s^2 + 23*s + 13, (s + 1)^2*(s + 2))
+
+ans =
+
+     3/(s + 1) + 2/(s + 1)^2 + 13/(s + 2)
+\end{verbatim}
+
+\subsection{}
+Using the inverse Laplace Transform, we get the following result.
+
+\begin{align*}
+    f(t) &= \mathcal{L}^{-1} \left\{ \frac{16s^2 + 23s + 13}{(s + 1)^2(s + 2)} \right\} \\
+    &= \mathcal{L}^{-1} \left\{ \frac{3}{s + 1} + \frac{2}{(s + 1)^2} + \frac{13}{s + 2} \right\} \\
+    &= \mathcal{L}^{-1} \left\{ \frac{3}{s + 1} \right\} + \math

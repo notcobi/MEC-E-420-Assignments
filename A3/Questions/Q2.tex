@@ -1,0 +1,26 @@
+\section{}
+
+Using the Laplace transform integral, show that the transform of $f(t) = \cos \Omega t$ is
+$F(s) = s/(s^2 + \Omega^2)$, and that the associated region of convergence 
+(the values of s for which the integral converges) is $\Re\{s\} > 0$. 
+Hint: start by using the identity
+\[
+    \cos \Omega t = \frac{1}{2} \left( e^{j\Omega t} + e^{-j\Omega t} \right)
+\]
+
+\subsection{}
+Using the exponential form of the cosine function and the definition of the Laplace transform, we have:
+\[
+\begin{aligned}
+    \mathcal{L}(\cos \Omega t) = \int_{0}^{\infty} e^{-st} \cos \Omega t dt &=
+    \int_{0}^{\infty} e^{-st} \frac{1}{2} \left( e^{j\Omega t} + e^{-j\Omega t} \right) dt \\
+    &= \frac{1}{2} \int_{0}^{\infty} e^{-(s-j\Omega)t} + e^{-(s+j\Omega)t} dt \\
+    &= \frac{1}{2} \left( \frac{-1}{s-j\Omega} e^{-(s-j\Omega)t} + \frac{-1}{s+j\Omega} e^{-(s+j\Omega)t} \right) \bigg|_{0}^{\infty} \\
+    &= \frac{1}{2} \left( \frac{-1}{s-j\Omega} \left( 0 - 1 \right) + \frac{-1}{s+j\Omega} \left( 0 - 1 \right) \right) \\
+    &= \frac{1}{2} \left( \frac{1}{s+j\Omega} + \frac{1}{s-j\Omega} \right) \\
+    &= \frac{1}{2} \left( \frac{s-j\Omega}{s^2 + \Omega^2} + \frac{s+j\Omega}{s^2 + \Omega^2} \right) \\
+    &= \frac{1}{2} \left( \frac{s-j\Omega + s+j\Omega}{s^2 + \Omega^2} \right) \\
+    &= \frac{1}{2} \left( \frac{2s}{s^2 + \Omega^2} \right) \\
+    &= \frac{s}{s^2 + \Omega^2}
+\end{aligned}
+\]
