@@ -16,11 +16,22 @@ Using the exponential form of the cosine function and the definition of the Lapl
     \int_{0}^{\infty} e^{-st} \frac{1}{2} \left( e^{j\Omega t} + e^{-j\Omega t} \right) dt \\
     &= \frac{1}{2} \int_{0}^{\infty} e^{-(s-j\Omega)t} + e^{-(s+j\Omega)t} dt \\
     &= \frac{1}{2} \left( \frac{-1}{s-j\Omega} e^{-(s-j\Omega)t} + \frac{-1}{s+j\Omega} e^{-(s+j\Omega)t} \right) \bigg|_{0}^{\infty} \\
+\end{aligned}
+\]
+
+From here we can see that the integral will diverge for $\Re\{s\} \leq 0$, since the exponential terms will diverge as $t \rightarrow \infty$.
+We can also see that the integral will not converge for $\Re\{s\} = 0$, since the exponential term will vanish, but the sinusoidal term will not.
+The lack of the exponential term will cause the integral to oscillate. For $\Re\{s\} > 0$, the exponential term will dominate for large $t$, and the integral will converge.
+
+Therefore the region of convergence is $\Re\{s\} > 0$.
+
+\[
+\begin{aligned}
     &= \frac{1}{2} \left( \frac{-1}{s-j\Omega} \left( 0 - 1 \right) + \frac{-1}{s+j\Omega} \left( 0 - 1 \right) \right) \\
     &= \frac{1}{2} \left( \frac{1}{s+j\Omega} + \frac{1}{s-j\Omega} \right) \\
     &= \frac{1}{2} \left( \frac{s-j\Omega}{s^2 + \Omega^2} + \frac{s+j\Omega}{s^2 + \Omega^2} \right) \\
     &= \frac{1}{2} \left( \frac{s-j\Omega + s+j\Omega}{s^2 + \Omega^2} \right) \\
     &= \frac{1}{2} \left( \frac{2s}{s^2 + \Omega^2} \right) \\
-    &= \frac{s}{s^2 + \Omega^2}
+    &= \boxed{\frac{s}{s^2 + \Omega^2}}
 \end{aligned}
 \]
