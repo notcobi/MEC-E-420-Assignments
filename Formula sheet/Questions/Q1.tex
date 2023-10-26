@@ -1,0 +1,36 @@
+\section{}
+Using the Inverse Laplace Transform method, compute the matrix exponential $e^{At}$ for
+\[
+A =
+\begin{bmatrix}
+2 & -1 \\
+-1 & 2
+\end{bmatrix}
+\]
+Note the solution should match Assignment \#2.
+
+\textbf{Solution}\\
+The equation linking the matrix exponential and the Laplace transform is
+\[
+e^{At} = \mathcal{L}^{-1}\left\{ (sI - A)^{-1} \right\}
+\]
+
+By Matlab,
+\begin{verbatim}
+ans =
+ 
+[exp(3*t)/2 + exp(t)/2, exp(t)/2 - exp(3*t)/2]
+[exp(t)/2 - exp(3*t)/2, exp(3*t)/2 + exp(t)/2]
+\end{verbatim}\\
+
+Written nicely,
+\begin{empheq}[box=\fbox]{align*}
+e^{At} &=
+\begin{bmatrix}
+\frac{e^{3t}}{2} + \frac{e^t}{2} & \frac{e^t}{2} - \frac{e^{3t}}{2} \\
+\frac{e^t}{2} - \frac{e^{3t}}{2} & \frac{e^{3t}}{2} + \frac{e^t}{2}
+\end{bmatrix}
+\end{empheq}
+
+The code used to generate the above was
+\lstinputlisting[language=Matlab]{Questions/Code/a4q1.m}

@@ -1,0 +1,118 @@
+%++++++++++++++++++++++++++++++++++++++++
+% Don't modify this section unless you know what you're doing!
+\documentclass[letterpaper,12pt]{article}
+\usepackage{tabularx} % extra features for tabular environment
+\usepackage{amsmath}  % improve math presentation
+\usepackage{graphicx} % takes care of graphic including machinery
+\usepackage[margin=1in,letterpaper]{geometry} % decreases margins
+\usepackage{cite} % takes care of citations
+\usepackage[final]{hyperref} % adds hyper links inside the generated pdf file
+\usepackage{pgfplotstable, booktabs}
+\usepackage{placeins}
+\usepackage{tabularray}
+\usepackage{titlesec}
+\usepackage{fancyhdr}
+\usepackage{empheq}
+\usepackage{amssymb}
+\usepackage{sectsty}
+\usepackage{tcolorbox}
+\usepackage{listings}
+\usepackage{xcolor}
+\usepackage{parskip}
+\usepackage{cancel}
+\usepackage{enumitem}
+\usepackage{amsmath}
+\usepackage{mathrsfs}
+\usepackage{physics}
+
+\definecolor{codegreen}{rgb}{0,0.6,0}
+\definecolor{codegray}{rgb}{0.5,0.5,0.5}
+\definecolor{codepurple}{rgb}{0.58,0,0.82}
+
+\lstdefinestyle{mystyle}{
+    commentstyle=\color{codegreen},
+    keywordstyle=\color{codepurple},
+    numberstyle=\tiny\color{codegray},
+    stringstyle=\color{codegreen},
+    basicstyle=\ttfamily\small,
+    breakatwhitespace=false,         
+    breaklines=true,                 
+    captionpos=b,                    
+    keepspaces=true,                                                     
+    showspaces=false,                
+    showstringspaces=false,
+    showtabs=false,                  
+    tabsize=4
+}
+
+\lstset{style=mystyle}
+  
+\newcommand*\widefbox[1]{\fbox{\hspace{0em}#1\hspace{0em}}}
+
+\pagestyle{fancy}
+\fancyhf{} % Clear all header and footer fields
+\fancyhead[L]{MEC E 420}
+%\fancyhead[C]{Center Header}
+\fancyhead[C]{Assignment 5}
+\fancyhead[R]{Alex Diep}
+
+\fancyfoot[C]{\thepage}
+
+\pgfplotsset{compat=1.18} 
+\titleformat*{\section}{\Large\bfseries}
+\titleformat*{\subsection}{\large\bfseries}
+
+\renewcommand{\thesection}{Question \arabic{section}}
+\renewcommand{\thesubsection}{(\alph{subsection})}
+\renewcommand*{\arraystretch}{1.5}
+
+\hypersetup{
+	colorlinks=true,       % false: boxed links; true: colored links
+	linkcolor=blue,        % color of internal links
+	citecolor=blue,        % color of links to bibliography
+	filecolor=magenta,     % color of file links
+	urlcolor=blue         
+}
+%++++++++++++++++++++++++++++++++++++++++
+\begin{document}
+% \begin{titlepage}
+%     \centering
+%     \vspace*{2cm} % Adjust vertical spacing
+    
+%     % Title
+%     \Huge {MEC E 301 \\Lab 1: Dimensional Measurement} \\
+%     \vspace{1cm} % Adjust vertical spacing
+    
+%     % Author
+%     \Large by: Alex Diep \\
+%     \vspace{1cm} % Adjust vertical spacing
+
+%     % Date
+%     \Large Date: September 19, 2023 \\ % or manually specify a date
+%     \vspace{4cm} % Adjust vertical spacing
+
+%     % CCID and Student ID in smtaller font
+%     \normalsize CCID: abdiep \\
+%     \normalsize Student ID: 1664334 \\ 
+%     \normalsize Section: D21 \\
+    
+%     \vfill % Fill vertical space
+    
+%     % Additional content (e.g., university logo or other information)
+    
+% \end{titlepage}
+
+\input{Questions/Q1}
+\input{Questions/Q2}
+\input{Questions/Q3}
+\input{Questions/Q4}
+
+% \newpage
+% %\bibliographystyle{IEEEtran}
+% %\bibliography{citations.bib}
+% %\bibliography{}
+
+% \newpage
+% \appendix
+% \input{Appendix/A}
+\end{document}

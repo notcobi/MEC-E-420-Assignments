@@ -1,0 +1,233 @@
+%++++++++++++++++++++++++++++++++++++++++
+% Don't modify this section unless you know what you're doing!
+\documentclass[letterpaper,12pt]{article}
+\usepackage{tabularx} % extra features for tabular environment
+\usepackage{amsmath}  % improve math presentation
+\usepackage{graphicx} % takes care of graphic including machinery
+\usepackage[margin=1in,letterpaper]{geometry} % decreases margins
+\usepackage{cite} % takes care of citations
+\usepackage[final]{hyperref} % adds hyper links inside the generated pdf file
+\usepackage{pgfplotstable, booktabs}
+\usepackage{placeins}
+\usepackage{tabularray}
+\usepackage{titlesec}
+\usepackage{fancyhdr}
+\usepackage{empheq}
+\usepackage{amssymb}
+\usepackage{sectsty}
+\usepackage{tcolorbox}
+\usepackage{listings}
+\usepackage{xcolor}
+\usepackage{parskip}
+\usepackage{cancel}
+\usepackage{enumitem}
+\usepackage{amsmath}
+\usepackage{mathrsfs}
+\usepackage{physics}
+
+\definecolor{codegreen}{rgb}{0,0.6,0}
+\definecolor{codegray}{rgb}{0.5,0.5,0.5}
+\definecolor{codepurple}{rgb}{0.58,0,0.82}
+
+\lstdefinestyle{mystyle}{
+    commentstyle=\color{codegreen},
+    keywordstyle=\color{codepurple},
+    numberstyle=\tiny\color{codegray},
+    stringstyle=\color{codegreen},
+    basicstyle=\ttfamily\small,
+    breakatwhitespace=false,         
+    breaklines=true,                 
+    captionpos=b,                    
+    keepspaces=true,                                                     
+    showspaces=false,                
+    showstringspaces=false,
+    showtabs=false,                  
+    tabsize=4
+}
+
+\lstset{style=mystyle}
+  
+\newcommand*\widefbox[1]{\fbox{\hspace{0em}#1\hspace{0em}}}
+
+\pagestyle{fancy}
+\fancyhf{} % Clear all header and footer fields
+\fancyhead[L]{MEC E 420}
+%\fancyhead[C]{Center Header}
+\fancyhead[C]{Assignment 2}
+\fancyhead[R]{Alex Diep}
+
+\fancyfoot[C]{\thepage}
+
+\pgfplotsset{compat=1.18} 
+\titleformat*{\section}{\Large\bfseries}
+\titleformat*{\subsection}{\large\bfseries}
+
+% \renewcommand{\thesection}{Question \arabic{section}}
+% \renewcommand{\thesubsection}{(\alph{subsection})}
+% \renewcommand*{\arraystretch}{1.5}
+
+\hypersetup{
+	colorlinks=true,       % false: boxed links; true: colored links
+	linkcolor=blue,        % color of internal links
+	citecolor=blue,        % color of links to bibliography
+	filecolor=magenta,     % color of file links
+	urlcolor=blue         
+}
+%++++++++++++++++++++++++++++++++++++++++
+\begin{document}
+\section{State Models}
+Consider a system with 
+\begin{enumerate}
+    \item $n$, the order of the ODE 
+    \item $m$, the number of inputs
+    \item $p$, the number of outputs
+\end{enumerate}
+
+General procedure:
+\begin{enumerate}
+    \item Create $n$ state variables
+    \item Create $n$ first order ODEs
+    \item Write $\dot{x} = f(x, u)$
+    \item Write $y = h(x, u)$
+\end{enumerate}
+
+If the system is linear, then the state model is
+\begin{align*}
+    \dot{x} &= Ax + Bu \\
+    y &= Cx + Du
+\end{align*}
+
+\section{Numerical Simulation with MATLAB}
+Example, some random order 4 system with $x_{1}(0) = 1$, $x_{2}(0) = 2$,
+$u_1 = \cos(t)$, $u_2 = \sin(t)$.
+\begin{lstlisting}[language=Matlab]
+    function x_dot = f(t, x)
+    x_dot = [
+        x(3);
+        x(4);
+        -10*x(1) + 10*x(2) + cos(t)
+        10*x(1) - 10*x(2) - sin(t)
+    ];
+end
+
+[t, x] = ode45(@f, [0, 10], [1, 2, 0, 0]);
+\end{lstlisting}
+
+\section{Linearization}
+Select a point $(x_0, u_0)$ and to be the equilibrium point. That is,
+\begin{align*}
+    f(x_0, u_0) &= 0 \\
+\end{align*}
+
+From the set of equilibrium points, choose the appropriate one to linearize about.
+Then,
+\begin{align*}
+    A = \frac{\partial f}{\partial x} \bigg|_{x=x_0, u=u_0} \\
+    B = \frac{\partial f}{\partial u} \bigg|_{x=x_0, u=u_0} \\
+    C = \frac{\partial h}{\partial x} \bigg|_{x=x_0, u=u_0} \\
+    D = \frac{\partial h}{\partial u} \bigg|_{x=x_0, u=u_0} \\
+\end{align*}
+
+Example for inverted pendulum on a cart with equilibrium point $x_0 = (x_10, 0,
+0, 0)$ and $u_0 = 0$.
+\begin{lstlisting}[language=Matlab]
+% Declare symbolic variables
+syms x1 x2 x3 x4 u
+
+% Define the system
+f = [
+    x3;
+    x4;
+    (4*x4^2*sin(x2) - 3*cos(x2)*sin(x2) + 4*u)/(4 - 3*cos(x2)^2);
+    (-3*x4^2*sin(x2)*cos(x2) + 3*sin(x2) -3*u*cos(x2))/(4 - 3*cos(x2)^2);
+];
+h = [x1; x2];
+
+% Compute the Jacobian
+dfdx = jacobian(f, [x1, x2, x3, x4])
+dfdu = jacobian(f, u)
+dhdx = jacobian(h, [x1, x2, x3, x4])
+dhdu = jacobian(h, u)
+
+A = subs(dfdx, [x1, x2, x3, x4, u], [x10, 0, 0, 0, 0])
+B = subs(dfdu, [x1, x2, x3, x4, u], [x10, 0, 0, 0, 0])
+C = subs(dhdx, [x1, x2, x3, x4, u], [x10, 0, 0, 0, 0])
+D = subs(dhdu, [x1, x2, x3, x4, u], [x10, 0, 0, 0, 0])
+\end{lstlisting}
+
+\section{Solutions to Linear Systems}
+Split the system into two parts: the zero-input response and the zero-state
+response. 
+\begin{align*}
+    x(t) &= x_{\text{z-i}}(t) + x_{\text{z-s}}(t) \\
+    y(t) &= C x_{\text{z-i}}(t) + C x_{\text{z-s}}(t) + Du(t)
+\end{align*}
+
+\subsection{Zero-Input Response}
+The zero-input problem is:
+\begin{align*}
+    \dot{x} &= Ax \\
+    y &= Cx\\ 
+    x(0) &= x_0 \\
+    u &= 0
+\end{align*}
+
+The solution is
+\begin{align*}
+    x_{\text{z-i}}(t) = e^{At}x_0 \\
+    y_{\text{z-i}}(t) = Ce^{At}x_0
+\end{align*}
+
+
+\subsection{Matrix exponential properties}
+\begin{gather*}
+    e^{At} = \sum_{k=0}^{\infty} \frac{A^kt^k}{k!} \\
+    e^{At}|_{t=0} = I \\
+    e^{At_1}e^{At_2} = e^{A(t_1 + t_2)} \\
+    e^{A_1t}e^{A_2t} = e^{(A_1 + A_2)t} \iff A_1A_2 = A_2A_1 \\
+    (e^{At})^{-1} = e^{-At} \\
+    Ae^{At} = e^{At}A \\
+    \frac{d}{dt}e^{At} = Ae^{At} = e^{At}A \\
+    e^{At} = Ve^{Dt}V^{-1}  = \mathcal{L}^{-1}\{sI - A\}^{-1}
+\end{gather*}
+
+\subsection{Zero-State Response}
+The zero-state problem is:
+\begin{align*}
+    \dot{x} &= Ax + Bu \\
+    y &= Cx + Du \\
+    x(0) &= 0 \\
+    u &= u(t)
+\end{align*}
+
+By integrating factor method, the solution is:
+\begin{align*}
+    x_{\text{z-s}}(t) &= \int_{0}^{t} e^{A(t-\tau)}Bu(\tau) d\tau \\
+    y_{\text{z-s}}(t) &= \int_{0}^{t} Ce^{A(t-\tau)}Bu(\tau) d\tau + Du(t)
+\end{align*}
+
+\section{Laplace Transform Method}
+\subsection{Laplace Transform and Properties}
+\begin{align*}
+    \mathcal{L}{f(t)} &= F(s) = \int_{0}^{\infty} f(t)e^{-st} dt \\
+    \mathcal{L}{\dot{f}(t)} &= sF(s) - f(0) \\
+    \mathcal{L}{\ddot{f}(t)} &= s^2F(s) - sf(0) - \dot{f}(0) \\
+    \mathcal{L}\left\{\int_{0}^{t} f(\tau) d\tau\right\} &= \frac{F(s)}{s} \\
+    \mathcal{L}{f(t-t_d)} &= e^{-st_d}F(s) \\
+\end{align*}
+
+\subsection{Poles and Convergence}
+\begin{itemize}
+    \item In general, the right most pole determines the region of convergence. 
+    \item Use the analogy that the real part of poles correspond to the expontential decay rate of the system and the imaginary part corresponds to the oscillation frequency.
+    \item Repeated poles is correspond to $t e^{-at}$ or $t \sin(at)$.
+    \item idk i might add fvt later
+\end{itemize}
+
+\subsection{Transfer Function}
+The transfer function is defined from:
+\begin{align*}
+    Y(s) &= \underbrace{C (sI - A)^{-1} x_0}_{Y_{\text{z-i}}(s)} + \underbrace{\overbrace{[C(sI - A)^{-1} B + D]}^{G(s)} U(s)}_{Y_{\text{z-s}}(s)} \\
+    G(s) &= C(sI - A)^{-1}B + D
+\end{align*}
+\end{document}
