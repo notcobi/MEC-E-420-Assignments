@@ -206,6 +206,13 @@ By integrating factor method, the solution is:
     y_{\text{z-s}}(t) &= \int_{0}^{t} Ce^{A(t-\tau)}Bu(\tau) d\tau + Du(t)
 \end{align*}
 
+\subsection{Total Response}
+The total trajectory and response respectively are:
+\begin{align*}
+    x(t) &= \underbrace{e^{At}x_0}_{x_{\text{z-i}}(t)} + \underbrace{\int_{0}^{t} e^{A(t-\tau)}Bu(\tau) d\tau}_{x_{\text{z-s}}(t)} \\
+    y(t) &= \underbrace{Ce^{At}x_0}_{y_{\text{z-i}}(t)} + \underbrace{\int_{0}^{t} Ce^{A(t-\tau)}Bu(\tau) d\tau + Du(t)}_{y_{\text{z-s}}(t)}
+\end{align*}
+
 \section{Laplace Transform Method}
 \subsection{Laplace Transform and Properties}
 \begin{align*}
@@ -223,6 +230,13 @@ By integrating factor method, the solution is:
     \item Repeated poles is correspond to $t e^{-at}$ or $t \sin(at)$.
     \item idk i might add fvt later
 \end{itemize}
+
+\subsection{Solution to State Space Model}
+The trajectory and response respectively are:
+\begin{align*}
+    x(t) &= \underbrace{\mathcal{L}^{-1}\{(sI - A)^{-1}x_0\}}_{x_{\text{z-i}}(t)} + \underbrace{\mathcal{L}^{-1}\{(sI - A)^{-1}BU(s)\}}_{x_{\text{z-s}}(t)} \\
+    y(t) &= \underbrace{\mathcal{L}^{-1}\{C(sI - A)^{-1}x_0\}}_{y_{\text{z-i}}(t)} + \underbrace{\mathcal{L}^{-1}\{[C(sI - A)^{-1}B + D]U(s)\}}_{y_{\text{z-s}}(t)}
+\end{align*}
 
 \subsection{Transfer Function}
 The transfer function is defined from:
