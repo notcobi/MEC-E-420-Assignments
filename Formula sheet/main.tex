@@ -311,6 +311,93 @@ to do later cause lazy
 
 \section{Stability}
 \subsection{Internal Stability}
-$x(0)$
+Internal stability is concerned with unforced ($u=0$) systems. This corresponds to the trajectory $x_{\text{z-i}}(t)$ and the response $y_{\text{z-i}}(t)$.
+
+For $x(0)$, the system is internally \textbf{stable} about an equilibrium point $x_e$ if and only if for every $\epsilon > 0$, there exists a $\delta > 0$ such that:
+\begin{align*}
+    \norm{x(0) - x_e} < \delta \implies \norm{x(t) - x_e} < \epsilon, \quad \forall t \geq 0
+\end{align*}
+A system is said to be \textbf{asymptotically stable} if it is stable and $\lim_{t\to\infty} x(t) = x_e$.
+
+For linear systems, the system is internally stable if and only if every eigenvalue of $A$ has a negative real part. 
+$\text{Re}(\lambda_i) < 0, \forall i = 1, \dots n$.
+
+\subsection{BIBO Stability}
+BIBO (bounded-input bounded-output) stability is concerned with zero state systems. This corresponds to the trajectory 
+$x_{\text{z-s}}(t)$ and the response $y_{\text{z-s}}(t)$.
+
+Assume $G(s)$ is a rational and proper transfer function. Then, the system is BIBO stable if and only if every pole of $G(s)$ has a 
+negative real part. $\text{Re}(\text{pole}_i) < 0, \forall i = 1, \dots n$.
+
+If the system is not stable, then there exists a bounded input $u(t)$ such that the output $y(t)$ is unbounded. Not all bounded inputs
+will cause an unstable BIBO system to be unbounded.
+
+\subsection{Connection between Internal and BIBO Stability}
+For a linear system, internal stability implies BIBO stability. However, BIBO stability does not imply internal stability. This is because
+the poles of $G(s)$ are a subset of the eigenvalues of $A$.
+
+asymptotic stability $\implies$ BIBO stability
+\subsection{Closed Loop Stability}
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.5\textwidth]{closed loop diagram.png}
+    \caption{Closed loop system}
+\end{figure}
+Assume:
+\begin{itemize}
+    \item Both controller ($A_c$, $B_c$, $C_c$, $D_c$) and plant ($A_p$, $B_p$, $C_p$, $D_p$) are minimal realizations.
+    \item $D_c= 0$ or $D_p = [D_u, D_w] = 0$, such that $D_c D_u = D_u D_c = 0$ and $D_c D_w = D_w D_c = 0$.
+\end{itemize}
+Then, the state-space form of the closed loop system is:
+\begin{align*}
+    \dot{x}_cl &= \begin{bmatrix}
+        \dot{x}_c \\
+        \dot{x}_p
+    \end{bmatrix} = \underbrace{
+    \begin{bmatrix}
+    A_c - B_c D_u C_c & -B_c C_p \\
+    B_u C_c & A_p - B_u D_c C_p
+    \end{bmatrix}}_{A_{cl}}
+    \begin{bmatrix}
+        x_c \\
+        x_p
+    \end{bmatrix} + \underbrace{
+    \begin{bmatrix}
+        B_c & -B_c D_w & -B_c \\
+        B_u D_c & B_w & -B_u D_c
+    \end{bmatrix}}_{B_{cl}}
+    \begin{bmatrix}
+        r \\
+        w \\
+        v 
+    \end{bmatrix} \\
+    y_cl &= \begin{bmatrix}
+        e_m \\
+        u_p \\
+        y  \\
+        y_m 
+    \end{bmatrix} = \underbrace{
+    \begin{bmatrix}
+        -D_u C_c & -C_p \\
+        C_c & -D_c C_p \\
+        D_u C_c & C_p \\
+        D_u C_c & C_p 
+    \end{bmatrix}}_{C_{cl}}
+    \begin{bmatrix}
+        x_c \\
+        x_p
+    \end{bmatrix} + \underbrace{
+    \begin{bmatrix}
+        1 & -D_w & -1 \\
+        D_c & 0 & -D_c \\
+        0 & D_w & 0 \\
+        0 & D_w & 1
+    \end{bmatrix}}_{D_{cl}}
+    \begin{bmatrix}
+        r \\
+        w \\
+        v
+    \end{bmatrix}
+\end{align*}
 
 \end{document}

@@ -1,0 +1,30 @@
+\section{}
+Recall the analog circuit from Assignment \#1
+
+As we saw in Assignment \#1, the state-space form of the system is:
+\begin{align*}
+    A &= 
+    \begin{bmatrix}
+        -1/(R_1 C) & 0 \\
+        0 & -R_2/L \\
+    \end{bmatrix}, \;\;\;\;\;
+    B =
+    \begin{bmatrix}
+        1/(R_1 C) \\
+        1/L \\
+    \end{bmatrix} \\
+    C &=
+    [0, R_2], \;\;\;\;\;
+    D = 0
+\end{align*}
+
+Computing the transfer function in Matlab,
+\begin{verbatim}
+G =
+ 
+R2/(R2 + L*s)
+\end{verbatim}
+\[\boxed{\text{Since size}(A) = 2, \text{deg}(G(s)) = 1, \text{the system is not minimal as } 2 > 1}\]
+
+The code used to generate this is:
+\lstinputlisting[language=Matlab]{Questions/Code/a5q4.m}
