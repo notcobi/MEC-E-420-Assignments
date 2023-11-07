@@ -244,4 +244,73 @@ The transfer function is defined from:
     Y(s) &= \underbrace{C (sI - A)^{-1} x_0}_{Y_{\text{z-i}}(s)} + \underbrace{\overbrace{[C(sI - A)^{-1} B + D]}^{G(s)} U(s)}_{Y_{\text{z-s}}(s)} \\
     G(s) &= C(sI - A)^{-1}B + D
 \end{align*}
+
+\section{Step Response}
+\subsection{First Order System}
+The standard first-order system is described by the following transfer function:
+\begin{align*}
+    G(s) = \frac{K}{\tau s + 1}
+\end{align*}
+For a step response $u = u_{0}(t)\implies U = 1/s$, the output is:
+\begin{align*}
+    Y(s) &= \frac{K}{\tau s + 1} \frac{1}{s} \\
+    y(t) &= K(1 - e^{-t/\tau})
+\end{align*}
+To find the time constant $\tau$ and the gain $K$, we can use some properties:
+\begin{align*}
+    \lim_{t\to\infty} y(t) = K(1 - e^{-t/\tau}) = K \\
+    y(\tau) = K(1 - e^{-1}) = 0.632K = 63.2\%K
+\end{align*}
+\subsection{Second Order System}
+The standard second-order system is described by the following transfer function:
+\begin{align*}
+    G(s) = \frac{\omega_n^2}{s^2 + 2\zeta\omega_n s + \omega_n^2}
+\end{align*}
+For a step response $u = \alpha u_{0}(t)\implies U = 1/s$, the response can be obtained
+by using $\omega_d = \omega_n\sqrt{1 - \zeta^2}$:
+\begin{align*}
+    y(t) = \alpha - \alpha e^{-\zeta\omega_n t}\left[\cos(\omega_d t) +
+     \frac{\zeta \omega_n}{\omega_d}\sin(\omega_d t)\right]
+\end{align*}
+To determine $\zeta$ and $\omega_n$, define overshoot $M_p = (y_{\text{max}} -
+y_{\infty})/y_{\infty}$ and peak time $t_p \implies y(t_p) = y_{\text{max}}$.
+\begin{align*}
+    \zeta = \frac{(\ln(M_p))^2}{\pi^2 + (\ln(M_p))^2} \\
+    \omega_n = \frac{\pi}{t_p\sqrt{1 - \zeta^2}}
+\end{align*}
+\section{Impulse Response}
+Recall the Dirac delta function $\delta(t)$ is defined as:
+\begin{align*}
+    \int_{-\infty}^{\infty} \delta(t) dt = 1 \\
+    \delta(t) = 0 \quad \forall t \neq 0 \\
+    \int_{-\infty}^{\infty} f(t)\delta(t-t_0) dt = f(t_0)
+\end{align*}
+The zero-state response to a impulse input $u = \delta(t)$ is:
+\begin{align*}
+    g(t) &= \int_{0}^{t} C e^{A(t-\tau)}B \delta(\tau) d\tau + D \delta(t) \\
+    = C e^{At}B + D \delta(t)
+\end{align*}
+The Laplace transform of the impulse response is:
+\begin{align*}
+    G(s) = C(sI - A)^{-1}B + D
+\end{align*}
+This is no coincidence. The transfer function is the Laplace transform of the
+impulse response.
+
+By convolution,
+\begin{align*}
+    y_{\text{z-s}}(t) &= (g * u)(t) \\
+    &= \int_{0}^{t} g(t - \tau) u(\tau) d\tau \\
+    &= \int_{0}^{t} C e^{A(t-\tau)}B u(\tau) d\tau + D u(t) \\
+\end{align*}
+Which is exactly the zero-state response obtained using the time-domain integrating
+factor method.
+
+\section{Realization}
+to do later cause lazy
+
+\section{Stability}
+\subsection{Internal Stability}
+$x(0)
+
 \end{document}
