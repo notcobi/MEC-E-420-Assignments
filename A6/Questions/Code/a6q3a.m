@@ -17,5 +17,3 @@ Acl = [Ac -Bc*Cp; Bp*Cc Ap-Bp*Dc*Cp]
 [V, D] = eig(Acl)
 disp('Real part of eigenvalues of Acl: ')
 real(D)
-
-

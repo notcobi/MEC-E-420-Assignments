@@ -337,7 +337,7 @@ For a linear system, internal stability implies BIBO stability. However, BIBO st
 the poles of $G(s)$ are a subset of the eigenvalues of $A$.
 
 asymptotic stability $\implies$ BIBO stability
-\subsection{Closed Loop Stability}
+\subsection{Closed Loop Systems}
 \begin{figure}[h]
     \centering
     \includegraphics[width=0.5\textwidth]{closed loop diagram.png}
@@ -399,5 +399,72 @@ Then, the state-space form of the closed loop system is:
         v
     \end{bmatrix}
 \end{align*}
+Casting to transfer functions where
+\begin{align*}
+    G_c(s) &:= C_c (sI - A_c)^{-1} B_c + D_c \\
+    G(s) &:= C_p (sI - A_p)^{-1} B_p + D_p := 
+    \begin{bmatrix}
+        G_p(s) & G_d(s)
+    \end{bmatrix}
+\end{align*}
+Then the system becomes:
+\begin{align*}
+    \begin{bmatrix}
+        E_m \\
+        U_p \\
+        Y \\
+        Y_m
+    \end{bmatrix}
+    &=
+    \begin{bmatrix}
+        \frac{1}{1+G_p G_c} & \frac{G_d}{1+G_p G_c} & \frac{-1}{1+G_p G_c} \\
+        \frac{G_c}{1+G_p G_c} & \frac{-G_c G_d}{1+G_p G_c} & \frac{-G_c}{1+G_p G_c} \\
+        \frac{G_p G_c}{1+G_p G_c} & \frac{G_d}{1+G_p G_c} & \frac{-G_p G_c}{1+G_p G_c} \\
+        \frac{G_p G_c}{1+G_p G_c} & \frac{G_d}{1+G_p G_c} & \frac{-1}{1+G_p G_c}
+    \end{bmatrix}
+    \begin{bmatrix}
+        R \\
+        W \\
+        V
+    \end{bmatrix}
+\end{align*}
+\subsection{Unmodeled Disturbance Input}
+Most of the time we just assume that disturbance is added to the input $u_p$. In the transfer function matrix, $G_d = G_p$.
+\subsection{Internal Stability of Closed Loop Systems}
+The closed loop system is internally stable if and only if every eigenvalue of $A_{cl}$ has a negative real part.
+\subsection{I/O Stability of Closed Loop Systems}
+The closed loop system is I/O stable if and only if every entry of the transfer function matrix is BIBO stable. There are 
+5 unique transfer functions to be considered:
+\begin{align*}
+    \frac{1}{1+G_p G_c} \\
+    \frac{G_c}{1+G_p G_c} \\
+    \frac{G_p G_c}{1+G_p G_c} \\
+    \frac{G_d}{1+G_p G_c} \\
+    \frac{G_c G_d}{1+G_p G_c} 
+\end{align*}
+If the disturbance is added to the input, then $G_d = G_p$ and then we only need to check:
+\begin{align*}
+    \frac{1}{1+G_p G_c} \\
+    \frac{G_c}{1+G_p G_c} \\
+    \frac{G_p G_c}{1+G_p G_c} \\
+    \frac{G_p}{1+G_p G_c} \\
+\end{align*}
+\subsubsection{Characteristic Polynomial for Closed Loop Systems}
+Define the numerator and denominator of the transfer functions:
+\begin{align*}
+    G_c := \frac{n_c}{d_c}, \quad G := [G_p, G_d] := [\frac{n_p}{d_p}, \frac{n_d}{d_d}]
+\end{align*}
+The characteristic polynomial is:
+\begin{align*}
+    P = n_p n_c + d_p d_c
+\end{align*}
+By Theorem 4.4.1, the closed loop system is I/O stable if and only if all roots of $P$ have a negative real part.
+
+\subsubsection{Theorem 4.4.2}
+The closed loop system is I/O stable if and only if
+\begin{enumerate}
+    \item $1 + G_p G_c$ has only negative real part roots
+    \item $G_p G_c$ has no pole-zero cancellations
+\end{enumerate}
 
 \end{document}

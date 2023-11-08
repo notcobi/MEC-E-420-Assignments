@@ -3,7 +3,7 @@ Consider the following closed-loop system:
 % too lazy to remake the block diagram with tikz
 \begin{figure}[h]
     \centering
-    \includegraphics[width=0.5\textwidth]{Questions/Figures/Q3ProblemDiagram.png}
+    \includegraphics[width=0.8\textwidth]{Questions/Figures/Q3ProblemDiagram.png}
     \caption{Block diagram of the closed-loop system}
     \label{fig:Q3ProblemDiagram}
 \end{figure}
@@ -32,68 +32,6 @@ and the plant's are
 \end{enumerate}
 
 \subsection{}
-% \subsection{Closed Loop Stability}
-% \begin{figure}[h]
-%     \centering
-%     \includegraphics[width=0.5\textwidth]{closed loop diagram.png}
-%     \caption{Closed loop system}
-% \end{figure}
-% Assume:
-% \begin{itemize}
-%     \item Both controller ($A_c$, $B_c$, $C_c$, $D_c$) and plant ($A_p$, $B_p$, $C_p$, $D_p$) are minimal realizations.
-%     \item $D_c= 0$ or $D_p = [D_u, D_w] = 0$, such that $D_c D_u = D_u D_c = 0$ and $D_c D_w = D_w D_c = 0$.
-% \end{itemize}
-% Then, the state-space form of the closed loop system is:
-% \begin{align*}
-%     \dot{x}_cl &= \begin{bmatrix}
-%         \dot{x}_c \\
-%         \dot{x}_p
-%     \end{bmatrix} = \underbrace{
-%     \begin{bmatrix}
-%     A_c - B_c D_u C_c & -B_c C_p \\
-%     B_u C_c & A_p - B_u D_c C_p
-%     \end{bmatrix}}_{A_{cl}}
-%     \begin{bmatrix}
-%         x_c \\
-%         x_p
-%     \end{bmatrix} + \underbrace{
-%     \begin{bmatrix}
-%         B_c & -B_c D_w & -B_c \\
-%         B_u D_c & B_w & -B_u D_c
-%     \end{bmatrix}}_{B_{cl}}
-%     \begin{bmatrix}
-%         r \\
-%         w \\
-%         v 
-%     \end{bmatrix} \\
-%     y_cl &= \begin{bmatrix}
-%         e_m \\
-%         u_p \\
-%         y  \\
-%         y_m 
-%     \end{bmatrix} = \underbrace{
-%     \begin{bmatrix}
-%         -D_u C_c & -C_p \\
-%         C_c & -D_c C_p \\
-%         D_u C_c & C_p \\
-%         D_u C_c & C_p 
-%     \end{bmatrix}}_{C_{cl}}
-%     \begin{bmatrix}
-%         x_c \\
-%         x_p
-%     \end{bmatrix} + \underbrace{
-%     \begin{bmatrix}
-%         1 & -D_w & -1 \\
-%         D_c & 0 & -D_c \\
-%         0 & D_w & 0 \\
-%         0 & D_w & 1
-%     \end{bmatrix}}_{D_{cl}}
-%     \begin{bmatrix}
-%         r \\
-%         w \\
-%         v
-%     \end{bmatrix}
-% \end{align*}
 To be able to use the developments in the notes, two assumptions have to be satisfied:
 \begin{itemize}
     \item Both controller ($A_c$, $B_c$, $C_c$, $D_c$) and plant ($A_p$, $B_p$, $C_p$, $D_p$) are minimal realizations.
@@ -156,3 +94,59 @@ ans =
 
 All Matlab calculations can be found in the script:
 \lstinputlisting[language=Matlab]{Questions/Code/a6q3a.m}
+
+\subsection{}
+% notes
+% subsubsection{Characteristic Polynomial for Closed Loop Systems}
+% Define the numerator and denominator of the transfer functions:
+% \begin{align*}
+%     G_c := \frac{n_c}{d_c}, \quad G := [G_p, G_d] := [\frac{n_p}{d_p}, \frac{n_d}{d_d}]
+% \end{align*}
+% The characteristic polynomial is:
+% \begin{align*}
+%     P = n_p n_c + d_p d_c
+% \end{align*}
+% By Theorem 4.4.1, the closed loop system is I/O stable if and only if all roots of $P$ have a negative real part.
+
+The transfer functions were obtained earlier in part (a). They are 
+\begin{align*}
+    G_c(s) &= 1 - \frac{5}{s+4}  = \frac{s-1}{s+4} \\
+    G_p(s) &= \frac{s+3}{s^2 + 3s + 2}
+\end{align*}
+
+The characteristic polynomial is
+\begin{align*}
+    P = n_p n_c + d_p d_c &= (s+3)(s-1) + (s^2 + 3s + 2)(s+4) \\
+\end{align*}
+By Matlab,
+\begin{verbatim}
+>> syms s
+>> (s+3)*(s-1) + (s^2  + 3*s + 2)*(s + 4)
+ 
+ans =
+ 
+(s - 1)*(s + 3) + (s + 4)*(s^2 + 3*s + 2)
+ 
+>> expand(ans)
+ 
+ans =
+ 
+s^3 + 8*s^2 + 16*s + 5
+ 
+>> roots([1 8 16 5])
+
+ans =
+
+   -5.0000
+   -2.6180
+   -0.3820
+\end{verbatim}
+
+The roots of $P$ are $-5$, $-2.618$, and $-0.382$. \textbf{Since all the roots have negative real parts, the closed-loop system is I/O stable.}
+
+\subsection{}
+Theorem 4.4.3 states that the closed loop is internally stable iff it is I/O stable. 
+
+That means the results from (a) and (b) are stating the same thing, that the closed-loop system is stable.
+
+Also the eigenvalues of $A_{cl}$ are the roots of the characteristic polynomial $P$.
