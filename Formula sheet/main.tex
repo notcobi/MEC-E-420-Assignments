@@ -458,7 +458,7 @@ The characteristic polynomial is:
 \begin{align*}
     P = n_p n_c + d_p d_c
 \end{align*}
-By Theorem 4.4.1, the closed loop system is I/O stable if and only if all roots of $P$ have a negative real part.
+By \textbf{Theorem 4.4.1}, the closed loop system is I/O stable if and only if all roots of $P$ have a negative real part.
 
 \subsubsection{Theorem 4.4.2}
 The closed loop system is I/O stable if and only if
@@ -467,4 +467,25 @@ The closed loop system is I/O stable if and only if
     \item $G_p G_c$ has no pole-zero cancellations
 \end{enumerate}
 
+\subsection{Connection Between Internal and I/O Stability}
+\subsubsection{Theorem 4.4.3}
+The closed loop system is internally stable if and only if it is I/O stable.
+\subsubsection{Routh-Hurwitz Criterion}
+The characteristic polynomial is
+\begin{equation*}
+    p(s) = n_p n_c + d_p d_c = s^n + a_{n-1}s^{n-1} + \dots + a_1 s + a_0, \quad a_i \in \mathbb{R}
+\end{equation*}
+Again, from \textbf{Theorem 4.4.1}, the closed loop system is I/O stable if and only if all roots of $P$ have a negative real part. A quick test
+is 
+\begin{table}[h]
+    \centering
+    \begin{tabular}{ll}
+        p(s) & Stability Criterion \\
+        \hline
+        $s + a_0$ & $a_0 > 0$ \\
+        $s^2 + a_1 s + a_0$ & $(\forall i) a_i > 0$ \\
+        $s^3 + a_2 s^2 + a_1 s + a_0$ & $(\forall i) a_i > 0$ and $a_1 a_2 > a_0$ \\
+        $s^4 + a_3 s^3 + a_2 s^2 + a_1 s + a_0$ & $(\forall i) a_i > 0$ and $a_2 a_3 > a_1$ and $(a_1 a_2 a_3 - a_{1}^2)/a_{3}^2 > a_0$
+    \end{tabular}
+\end{table}
 \end{document}
