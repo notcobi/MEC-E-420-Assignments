@@ -37,7 +37,8 @@ From $a$ to $b$, $s = j \omega$, $\omega \in [0, \infty)$,
 \end{align*}
 With help from MATLAB, 
 \begin{lstlisting}[language=Matlab]
-syms s omega real
+syms s 
+syms omega real
 L(s) = (2*s + 2)/(s*(s-1));
 simplify(real(L(j*omega)))
 simplify(imag(L(j*omega)))
