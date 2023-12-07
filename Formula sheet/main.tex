@@ -53,7 +53,7 @@
 \fancyhf{} % Clear all header and footer fields
 \fancyhead[L]{MEC E 420}
 %\fancyhead[C]{Center Header}
-\fancyhead[C]{Assignment 2}
+\fancyhead[C]{Formula Sheet}
 \fancyhead[R]{Alex Diep}
 
 \fancyfoot[C]{\thepage}
@@ -488,4 +488,217 @@ is
         $s^4 + a_3 s^3 + a_2 s^2 + a_1 s + a_0$ & $(\forall i) a_i > 0$ and $a_2 a_3 > a_1$ and $(a_1 a_2 a_3 - a_{1}^2)/a_{3}^2 > a_0$
     \end{tabular}
 \end{table}
+
+\section{Graphical Methods}
+\subsection{Principal of the Argument}
+Theorem 5.2.1 (Principal of the Argument): Suppose $G(s)$ has no poles or zeroes on $\mathcal{D}$, but $\mathcal{D}$ encircles 
+$n$ poles and $m$ zeroes of $G(s)$. Then $\mathcal{G}$ encircles the origin $n-m$ times CCW.
+
+\subsection{Nyquist Plotting}
+Input the Nyquist contour into the loop transfer function $L(s) = G_p(s) G_c(s)$ and plot the Nyquist plot. If $L(s)$ has real coefficients,
+then the Nyquist plot is symmetric about the real axis.
+
+\subsubsection{Case 1: No Poles on Re$\{s\} = 0$}
+Suppose $L(s) = \frac{2}{s-1}$.
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.5\textwidth]{case1 nyquist plots.png}
+    \caption{Nyquist contour and plot for case 1}
+\end{figure}
+There are 2 segments to consider: $a-b$ and $b-c$. Note, by symmetry $a-b$ and $a-c$ are the same. On $a-b$, $s= j\omega$, $\omega: [0, \infty)$ 
+\begin{lstlisting}[language=Matlab]
+syms s 
+syms omega real
+L(s) = 2/(s-1);
+
+simplify(real(L(j*omega)))
+simplify(imag(L(j*omega)))
+\end{lstlisting}
+\begin{verbatim}
+ans =
+ 
+-2/(omega^2 + 1)
+ 
+ 
+ans =
+ 
+-(2*omega)/(omega^2 + 1)
+ 
+>> 
+\end{verbatim}
+On $b-c$, $s \to \infty$. By the assumption that $L(s)$ is strictly proper, $L(s) \to 0$ as $s \to \infty$. Therefore, $b-c$ is the origin, always.
+
+\subsubsection{Case 2: Poles on Re$\{s\} = 0$}
+Suppose $L(s) = \frac{1}{s(s+1)^2}$. A right indent is required due to the $s=0$ pole. By symmetry, $c-d$ is the same as $a-b$.
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.5\textwidth]{case2 nyquist plots.png}
+    \caption{Nyquist contour and plot for case 2}
+\end{figure}
+
+On $a-b$, $s= j\omega$, $\omega: [\epsilon, \infty)$
+\begin{lstlisting}[language=Matlab]
+syms s
+syms omega real
+L(s) = 1/(s*(s+1)^2);
+
+simplify(real(L(j*omega)))
+simplify(imag(L(j*omega)))
+\end{lstlisting}
+\begin{verbatim}
+ans =
+
+-2/(omega^2 + 1)^2
+    
+    
+ans =
+    
+(omega^2 - 1)/(omega*(omega^2 + 1)^2)
+
+>>
+\end{verbatim}
+
+Point $a$ is $\omega \to 0$. 
+
+$b-c$ will go to the origin as $s \to \infty$ because $L(s)$ is strictly proper.
+
+Lastly, for $a-d$ consider the general form $L(s)$ with a pole at $s=jy$ with multiplicity $m$. Then we can write,
+\begin{align*}
+    L(s) = \frac{1}{(s-jy)^m} L_1 (s)
+\end{align*}
+where $L_1(s)$ has no poles at $s=jy$. Then indenting at $s= jy + \epsilon e^{j\theta}$, $\epsilon \to 0$, $\theta: [-\pi/2, \pi/2]$,
+\begin{align*}
+    L(jy + \epsilon e^{j\theta}) = \frac{1}{\epsilon^m e^{jm\theta}} L_1(jy + \epsilon e^{j\theta}) \approx \frac{e^{-j \theta m}}{(\epsilon)^m} L_1(jy)
+\end{align*}
+
+In this case, $y = 0$ and $m = 1$. Therefore on $a-d$, 
+\begin{align*}
+    L(\epsilon e^{j\theta}) \approx \frac{e^{-j \theta}}{\epsilon} \left(\frac{1}{(0 + 1)^2}\right) = \frac{e^{-j \theta}}{\epsilon}
+\end{align*}
+This is an arc with infinite radius sweeping from $\theta: [-\pi/2, \pi/2]$ CW. 
+
+\subsection{Nyquist Stability Criterion}
+Theorem 5.3.1 (Nyquist Stability Criterion): Let $n$ denote the number of poles of $L(s) = G_p(s) G_c(s)$ in Re$\{s\} > 0$. Construct
+the Nyquist plot of $L(s)$, indenting to the right around the poles around the imaginary axis. Then, the closed loop is stable 
+if and only if the Nyquist plot doesn't pass through the point -1 and encircles it exactly $n$ times CCW.
+
+\subsection{Bode Plots}
+Let $G(s)=n(s)/d(s)$ be a rational transfer function. Then,$G(s)$ can be factored as a product of the following terms:
+\subsubsection{Pure gain, $k$}
+$G(s) = k$
+If $k > 0$, 
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.6\textwidth]{case1 pure gain greater than 0.png}
+    \caption{Bode plot for pure gain $k > 0$}
+\end{figure}
+If $k < 0$,
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.6\textwidth]{case2 pure gain less than 0.png}
+    \caption{Bode plot for pure gain $k < 0$}
+\end{figure}
+\FloatBarrier
+\subsubsection{Pole or zero at the origin $G(s) = s$}
+For a pole, the Bode plot is $G(j \omega) = j\omega$, $\omega \in [0, \infty)$.
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.6\textwidth]{case3 pole or zero at origin.png}
+    \caption{Bode plot for pole at origin}
+\end{figure}
+\FloatBarrier
+
+\subsubsection{Real non-zero pole or zero $G(s) = \tau s \pm 1$}
+For $G(s) = \tau s + 1$, the Bode plot is $G(j \omega) = 1 + j\omega \tau$, $\omega \in [0, \infty)$.
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.6\textwidth]{case4 real nonzero root negative.png}
+    \caption{Bode plot for real non-zero pole or zero $G(s) = \tau s + 1$}
+\end{figure}
+
+For $G(s) = \tau s - 1$, the Bode plot is $G(j \omega) = -1 + j\omega \tau$, $\omega \in [0, \infty)$.
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.6\textwidth]{case5 real nonzero root positive.png}
+    \caption{Bode plot for real non-zero pole or zero $G(s) = \tau s - 1$}
+\end{figure}
+\FloatBarrier
+\subsubsection{Complex conjugate poles or zeros $G(s) = \frac{1}{\omega_{n}^2} (s^2 + 2\zeta \omega_n s + \omega_n^2)$, $\omega_n > 0$, $\zeta \in [0, 1]$}
+If the roots of $G(s)$ lie Re$\{s\} < 0$, then $G(j \omega) = \frac{1}{\omega_{n}^2} (\omega_n^2 - \omega^2 + j2\zeta \omega_n \omega)$, $\omega \in [0, \infty)$.
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.6\textwidth]{case6 complex conjugate negative.png}
+    \caption{Bode plot for complex conjugate with negative roots of $G(s) = \frac{1}{\omega_{n}^2} 
+    (s^2 + 2\zeta \omega_n s + \omega_n^2)$, $\omega_n > 0$, $\zeta \in [0, 1]$}
+\end{figure}
+\FloatBarrier
+If the roots of $G(s)$ lie Re$\{s\} > 0$, then $G(j \omega) = \frac{1}{\omega_{n}^2} (\omega_n^2 - \omega^2 - j2\zeta \omega_n \omega)$, $\omega \in [0, \infty)$.
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.6\textwidth]{case7 complex conjugate positive.png}
+    \caption{Bode plot for complex conjugate with positive roots of $G(s) = \frac{1}{\omega_{n}^2} 
+    (s^2 + 2\zeta \omega_n s + \omega_n^2)$, $\omega_n > 0$, $\zeta \in [0, 1]$}
+\end{figure}
+\FloatBarrier
+The roots of $G(s)$ lie on Re$\{s\} = 0$ iff $\zeta = 0$. Then $G(s) = \frac{1}{\omega_{n}^2} (s^2 + \omega_n^2)$ and 
+$G(j \omega) = \frac{1}{\omega_{n}^2} (\omega_n^2 - \omega^2)$, $\omega \in [0, \infty)$ gives 
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.6\textwidth]{case8 complex conjucate zero.png}
+    \caption{Bode plot for complex conjugate with zero roots of $G(s) = \frac{1}{\omega_{n}^2} 
+    (s^2 + \omega_n^2)$, $\omega_n > 0$}
+\end{figure}
+
+
+\FloatBarrier
+
+
+
+\section{Matlab Corner}
+\subsection{SimplifyFraction}
+\begin{lstlisting}[language=Matlab]
+syms s
+G = (s+1)*(s+2)/(s+3);
+simplifyFraction(G)
+simplifyFraction(G, 'Expand', true)
+\end{lstlisting}
+\begin{verbatim}
+ans =
+
+((s + 1)*(s + 2))/(s + 3)
+
+ans =
+
+(s^2 + 3*s + 2)/(s + 3)
+
+>> 
+\end{verbatim}
+
+\subsection{Root Finding Methods}
+\begin{lstlisting}[language=Matlab]
+syms s
+G = (s+1)*(s+2)/(s+3);
+[n, ~] = numden(G);
+
+% Method 1  
+c = sym2poly(n);
+r = roots(c)
+
+% Method 2
+r = solve(n)
+
+% Method 3
+r = vpasolve(n)
+\end{lstlisting}
+
+\subsection{Nyquist Plot}
+\begin{lstlisting}[language=Matlab]
+syms s
+L = = 1/(s*(s+1)*(s+2));
+[n, d] = numden(L);
+L = tf(n, d);
+nyquist(L)
+\end{lstlisting}
+
 \end{document}
