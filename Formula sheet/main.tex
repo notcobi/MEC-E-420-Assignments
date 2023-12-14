@@ -489,6 +489,13 @@ is
     \end{tabular}
 \end{table}
 
+\subsection{Internal Model Principle}
+\textbf{Proposition 4.7.1 (Internal Model Principle)} \textit{
+Assume the closed-loop system is stable and the loop transfer function
+$L(s) = G_p(s) G_c(s)$ is strictly proper. If $L(s)$ contains a copy of the 
+BIBO unstable terms in $R(s)$, then the system achieves perfect asymptotic 
+tracking: $e(t) \to 0$ as $t \to \infty$.}
+
 \section{Graphical Methods}
 \subsection{Principal of the Argument}
 Theorem 5.2.1 (Principal of the Argument): Suppose $G(s)$ has no poles or zeroes on $\mathcal{D}$, but $\mathcal{D}$ encircles 
@@ -692,6 +699,13 @@ S(s) = 1/(1 + L(s));
 bodemag(tf(sym2poly(n), sym2poly(d)))
 \end{lstlisting}
 
+Generally, target margins are 
+\begin{itemize}
+    \item $PM \geq 30^{\circ}$
+    \item $GM \geq 2$
+    \item $\text{NM} \geq 0.5$
+\end{itemize} 
+
 \section{Frequency Response Design}
 \subsection{Frequency Response}
 The \textbf{frequency response} is the zero-state response $y_{\text{z-s}}(t)$ to $u(t) = \cos\omega t$.
@@ -726,7 +740,7 @@ Only if $G(s)$ is BIBO stable does a second interpretation of Bode plots hold.
     f(t) = \frac{1}{\pi} \int_{0}^{\infty} |F(\omega)| \cos(\omega t + \angle F(\omega)) d\omega
 \end{equation*}
 
-\subsection{Designing A Frequency Response}'
+\subsection{Designing A Frequency Response}
 Define the sensitivity and complementary sensitivity transfer functions:
 \begin{align*}
     L(s) &= G_p(s) G_c(s) \\
@@ -754,6 +768,23 @@ is stable if and only if}
 \end{itemize}
 conditions 2 and 3 are known as \textbf{interpolation conditions}.
 
+\subsection{Loop Shaping Designs}
+A lead compensator has the form
+\begin{equation*}
+    G_{c}^{c} = \frac{\alpha T s +1 }{Ts+1}, \quad \alpha >1, \quad T>0
+\end{equation*}
+The Bode plot looks like 
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.6\textwidth]{section6 lead compensator.png}
+    \caption{Bode plot for lead compensator}
+\end{figure}
+where
+\begin{align*}
+    T &= \frac{1}{\omega_{\max} \sqrt{\alpha}} \\
+    G_{c}^{c}(j\omega_{\max}) &= \sqrt{\alpha} \\
+    \alpha &= \frac{1+ \sin\alpha_{\max}}{1 - \sin\alpha_{\max}}
+\end{align*}
 
 \section{Matlab Corner}
 \subsection{SimplifyFraction}
