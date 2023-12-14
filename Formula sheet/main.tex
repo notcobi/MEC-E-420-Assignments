@@ -650,9 +650,109 @@ $G(j \omega) = \frac{1}{\omega_{n}^2} (\omega_n^2 - \omega^2)$, $\omega \in [0, 
     (s^2 + \omega_n^2)$, $\omega_n > 0$}
 \end{figure}
 
+\subsection{Stability from Bode Plots}
+Define two frequencies:
+\begin{itemize}
+    \item $\omega_{gc}$, gain crossover, is the frequency where the $|G(j\omega)| = 1$.
+    \item $\omega_{pc}$, phase crossover, is the frequency where the $\angle G(j\omega) = -180^{\circ}$.
+\end{itemize}
+The margins can be obtained by
+\begin{itemize}
+    \item $PM = 180^{\circ} + \angle G(j\omega_{gc})$
+    \item $GM = \frac{1}{|G(j\omega_{pc})|}$
+\end{itemize}
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.6\textwidth]{bode stability diagram.png}
+    \caption{Bode plot with margins}
+\end{figure}
+This can be obtained by
+\begin{lstlisting}[language=Matlab]
+syms s
+G = 1/(s*(s+1)*(s+2));
+[n, d] = numden(G);
+margin(tf(sym2poly(n), sym2poly(d)))
+\end{lstlisting}
+right click the graph and select \texttt{Properties $\rightarrow$ Units}, and set to absolute. 
 
-\FloatBarrier
+Nyquist margin can be found by considering
+\begin{equation*}
+    S(s) = \frac{1}{1 + G_p(s) G_c(s)} = \frac{1}{1 + L(s)}
+\end{equation*}
+and 
+\begin{equation*}
+    \text{NM} = [\max_{\omega} |S(j\omega)|]^{-1}
+\end{equation*}
+which can be found easily by
+\begin{lstlisting}[language=Matlab]
+syms s
+L(s) = 1/(s*(s+1)*(s+2));
+S(s) = 1/(1 + L(s));
+[n, d] = numden(S);
+bodemag(tf(sym2poly(n), sym2poly(d)))
+\end{lstlisting}
 
+\section{Frequency Response Design}
+\subsection{Frequency Response}
+The \textbf{frequency response} is the zero-state response $y_{\text{z-s}}(t)$ to $u(t) = \cos\omega t$.
+
+\textbf{Theorem 6.1.1} \textit{Let $G(s)$ be the transfer function of a SISO system. If $G(s)$ is BIBO stable,
+i.e. all its poles lie in the open left-hand plane Re($s$)$<0$, the system's frequency response is}
+\begin{equation*}
+    y_{\text{z-s}}(t) = |G(j\omega)|\cos(\omega t + \angle G(j\omega))
+\end{equation*}
+
+Only if $G(s)$ is BIBO stable does a second interpretation of Bode plots hold.
+\begin{itemize}
+    \item $|G(j\omega)|$ is the magnitude of the frequency response.
+    \begin{itemize}
+        \item $|G(j\omega)|>1$ is amplification
+        \item $|G(j\omega)|<1$ is attenuation
+    \end{itemize}
+    \item $\angle G(j\omega)$ is the phase of the frequency response.
+    \begin{itemize}
+        \item $\angle G(j\omega) > 0$ is phase lead
+        \item $\angle G(j\omega) < 0$ is phase lag
+    \end{itemize}
+\end{itemize}
+
+\subsubsection{Frequency Content}
+\textbf{Theorem 6.1.2} \textit{Let f(t) be a real-valued signal with an associated Fourier transform}
+\begin{equation*}
+    F(\omega) = \int_{-\infty}^{\infty} f(t) e^{-j\omega t} dt
+\end{equation*}
+\textit{where $F(\omega)$ is complex-valued. This signal can be written as}
+\begin{equation*}
+    f(t) = \frac{1}{\pi} \int_{0}^{\infty} |F(\omega)| \cos(\omega t + \angle F(\omega)) d\omega
+\end{equation*}
+
+\subsection{Designing A Frequency Response}'
+Define the sensitivity and complementary sensitivity transfer functions:
+\begin{align*}
+    L(s) &= G_p(s) G_c(s) \\
+    S(s) &= \frac{1}{1 + L(s)} \\
+    T(s) &= \frac{L(s)}{1 + L(s)} 
+\end{align*}
+with the identity
+\begin{equation*}
+    S(s) + T(s) = 1
+\end{equation*}
+\textbf{Theorem 6.2.1} \textit{
+Let $L(s) = G_p(s) G_c(s)$ be the loop transfer function of a closed loop
+system, where the product $G_p(s) G_c(s)$ has no pole cancellations in $\text{Re}(s) \geq 0$. This close loop system
+is stable if and only if}
+\begin{itemize}
+    \item \textit{The sensitivity transfer function $S(s) = 1/(1 + L(s))$ is BIBO stable, i.e. has all its poles in $\text{Re}(s) < 0$.}
+    \item For each pole $p_k$ of $L(s)$ in $Re(s) \geq 0$ with multiplicity $m_k \geq 1$, 
+    \begin{align*}
+        S(p_k) = \frac{dS}{ds}(p_k) = ... = \frac{d^{m_k - 1}S}{ds^{m_k - 1}}(p_k) = 0
+    \end{align*}
+    \item For each zero $z_k$ of $L(s)$ in $Re(s) \geq 0$ with multiplicity $n_k \geq 1$,
+    \[
+        S(z_k) = 1, \quad \frac{dS}{ds}(z_k) = ... = \frac{d^{n_k - 1}S}{ds^{n_k - 1}}(z_k) = 0
+    \]
+\end{itemize}
+conditions 2 and 3 are known as \textbf{interpolation conditions}.
 
 
 \section{Matlab Corner}
